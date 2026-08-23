@@ -33,6 +33,9 @@
     try {
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('js-anim');
+        /* classe separada: o fim da timeline da Hero remove js-anim, e se os
+           reveals da 2a dobra dependessem dela apareceriam todos de uma vez */
+        document.documentElement.classList.add('js-reveal');
       }
     } catch (e) { /* navegador sem matchMedia: segue sem esconder nada */ }
   })();
@@ -67,7 +70,10 @@
 <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
         integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc"
         crossorigin="anonymous"
-        onerror="document.documentElement.classList.remove('js-anim')"></script>
+        onerror="document.documentElement.classList.remove('js-anim','js-reveal')"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"
+        integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh"
+        crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"
         integrity="sha384-xb96EMJeax+NLXMC88ZBa1xAeAW+kn+horHh/zFlbMLG2UPWhMJJSlv7fi57hS+Q"
         crossorigin="anonymous"></script>
@@ -152,7 +158,7 @@
             <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
           </svg>
         </a>
-        <a class="btn btn--ghost" href="#como-funciona">
+        <a class="btn btn--ghost" href="#servico-cirurgias">
           <!-- ícone Lucide "circle-play" inline -->
           <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -171,7 +177,7 @@
       </ul>
 
       <!-- Indicador de scroll -->
-      <a class="scroll-cue" href="#como-funciona" data-anim="cue">
+      <a class="scroll-cue" href="#servicos" data-anim="cue">
         <span class="scroll-cue__track" aria-hidden="true"><span class="scroll-cue__dot"></span></span>
         <span class="scroll-cue__label">Continuar</span>
       </a>
@@ -179,5 +185,151 @@
     </div>
   </div>
 </header>
+
+<main>
+
+<!-- =========================================================================
+     SEGUNDA DOBRA — SERVIÇOS
+     Estrutura herdada do print de referência (seção "featured-gear" do
+     design-system.html): título em duas linhas à esquerda com ponto final em
+     destaque, bloco de apoio alinhado à direita com parágrafo + fileira de
+     cápsulas, e grade de cards abaixo.
+     Três adaptações conscientes, porque o original é e-commerce e este é médico:
+     • as cápsulas de filtro ("Em Promoção / Destaques / Novidades") viram âncoras
+       reais para os três cards — filtro que não filtra nada seria cenário;
+     • o botão de favoritar no canto do card vira o índice 01/02/03;
+     • preço e avaliação em estrelas saem: nota de paciente é depoimento, vedado
+       pela Res. CFM 1.974/2011. No lugar entra a chamada de ação do card.
+     Não há imagem de serviço em /assets e não invento arquivo: o bloco visual do
+     card usa ícone Lucide inline sobre fundo tonal.
+     ========================================================================= -->
+<section class="services" id="servicos" aria-labelledby="services-title">
+  <div class="services__inner">
+
+    <!-- ---------- Cabeçalho da seção ---------- -->
+    <div class="services__head">
+      <h2 class="services__title" id="services-title" data-reveal="title">
+        <span class="line-mask"><span class="services__line">Do diagnóstico</span></span>
+        <span class="line-mask"><span class="services__line">à cirurgia<span class="services__dot">.</span></span></span>
+      </h2>
+
+      <div class="services__aside">
+        <p class="services__lede" data-reveal="lede">
+          Três frentes que se conectam: a consulta orienta os exames, e os exames
+          definem se — e quando — a cirurgia é indicada.
+        </p>
+        <!-- Âncoras para os cards. Sem estado "ativo" fixo: nenhum dos três é
+             mais importante que os outros, e marcar um seria arbitrário. -->
+        <nav class="services__nav" aria-label="Ir para um serviço" data-reveal="nav">
+          <a class="chip" href="#servico-consultas">Consultas</a>
+          <a class="chip" href="#servico-exames">Exames</a>
+          <a class="chip" href="#servico-cirurgias">Cirurgias</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ---------- Grade de serviços ---------- -->
+    <ul class="services__grid">
+
+      <li class="svc" id="servico-consultas" data-reveal="card">
+        <article class="svc__card">
+          <div class="svc__visual" aria-hidden="true">
+            <!-- Lucide "eye", stroke afinado para 1.25: a 2 o traço fica pesado
+                 neste tamanho e destoa do tom da marca -->
+            <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span class="svc__index">01</span>
+          </div>
+          <div class="svc__body">
+            <h3 class="svc__title">
+              <a class="svc__link" href="#agendamento">Consultas oftalmológicas</a>
+            </h3>
+            <p class="svc__text">
+              Avaliação clínica e diagnóstico de catarata, retinopatias, glaucoma,
+              pterígio e outras doenças oculares.
+            </p>
+            <span class="svc__cue" aria-hidden="true">
+              Agendar consulta
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+      </li>
+
+      <li class="svc" id="servico-exames" data-reveal="card">
+        <article class="svc__card">
+          <div class="svc__visual" aria-hidden="true">
+            <!-- Lucide "microscope" -->
+            <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/>
+              <path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/>
+              <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
+            </svg>
+            <span class="svc__index">02</span>
+          </div>
+          <div class="svc__body">
+            <h3 class="svc__title">
+              <a class="svc__link" href="#agendamento">Exames complementares</a>
+            </h3>
+            <p class="svc__text">
+              Parque tecnológico na própria clínica, para os diagnósticos que
+              exigem investigação mais detalhada.
+            </p>
+            <span class="svc__cue" aria-hidden="true">
+              Ver os exames
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+      </li>
+
+      <li class="svc" id="servico-cirurgias" data-reveal="card">
+        <article class="svc__card">
+          <div class="svc__visual" aria-hidden="true">
+            <!-- Lucide "scan-eye" -->
+            <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+              <circle cx="12" cy="12" r="1"/>
+              <path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/>
+            </svg>
+            <span class="svc__index">03</span>
+          </div>
+          <div class="svc__body">
+            <h3 class="svc__title">
+              <a class="svc__link" href="#agendamento">Cirurgias oculares</a>
+            </h3>
+            <p class="svc__text">
+              Catarata, refrativa e pterígio. A indicação vem depois da avaliação e
+              dos exames, e é explicada antes de qualquer decisão.
+            </p>
+            <span class="svc__cue" aria-hidden="true">
+              Entender as cirurgias
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+</main>
+
 </body>
 </html>

@@ -9,16 +9,23 @@
   var root = document.documentElement;
   var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* Mostra tudo em estado final e encerra. Usado por: movimento reduzido,
-     ausência de GSAP (CDN bloqueado) e o watchdog de segurança. */
-  function showFinalState() {
+  /* Mostra TUDO em estado final — Hero e segunda dobra. Usado por: movimento
+     reduzido, ausência de GSAP (CDN bloqueado) e o watchdog de segurança. */
+  function showEverything() {
+    root.classList.remove('js-anim');
+    root.classList.remove('js-reveal');
+  }
+
+  /* Só a Hero. Chamada no fim da timeline de entrada: js-reveal precisa
+     sobreviver, senão os cards da segunda dobra apareceriam de uma vez ali. */
+  function heroDone() {
     root.classList.remove('js-anim');
   }
 
   /* Se o usuário pede movimento reduzido, ou o GSAP não chegou, não há timeline:
      o conteúdo já está visível (a classe .js-anim nem foi adicionada, ou sai aqui). */
   if (reduceMQ.matches || !window.gsap) {
-    showFinalState();
+    showEverything();
     return;
   }
 
@@ -34,7 +41,7 @@
 
   /* Rede de segurança: se algo travar antes da timeline começar, o conteúdo
      aparece sozinho em 2,5 s. Uma Hero invisível é pior que uma Hero sem animação. */
-  var watchdog = setTimeout(showFinalState, 2500);
+  var watchdog = setTimeout(showEverything, 2500);
 
   /* --------------------------------------------------------------------------
      Espera fontes + imagem antes de medir/animar.
@@ -102,10 +109,10 @@
         /* Devolve o DOM da headline ao original: sem isso, as linhas ficariam
            congeladas na largura do momento do split e quebrariam num resize. */
         if (split) { split.revert(); headline.classList.remove('is-split'); }
-        /* Fim da timeline = estado final. Tirar .js-anim remove os estados
-           iniciais do CSS — indispensável depois do revert(), que devolve os
-           spans originais e os faria casar de novo com opacity:0. */
-        showFinalState();
+        /* Fim da timeline = estado final da Hero. Tirar .js-anim remove os
+           estados iniciais do CSS — indispensável depois do revert(), que
+           devolve os spans originais e os faria casar de novo com opacity:0. */
+        heroDone();
         gsap.set([photo, media], { clearProps: 'willChange' });
         initParallax();
       }
@@ -162,9 +169,47 @@
        filhos, então libero os contêineres junto com a entrada deles. */
     gsap.set(['[data-anim="actions"]', '[data-anim="pills"]'], { opacity: 1 });
 
+    initSectionReveals();
+
     /* Se o usuário ligar "reduzir movimento" no meio da sessão, salta pro fim. */
     var onPrefChange = function (e) { if (e.matches) { tl.progress(1); } };
     if (reduceMQ.addEventListener) reduceMQ.addEventListener('change', onPrefChange);
+  }
+
+  /* ==================== REVEALS DA SEGUNDA DOBRA =========================== */
+  /* Entradas disparadas por scroll. Os tweens escrevem transform inline nos
+     <li data-reveal="card">, e não nos .svc__card — que é onde mora o
+     transform de hover no CSS. Elementos diferentes, sem sobrescrita: inline
+     style de animação em cima de um elemento que também tem transform no CSS
+     é justamente o tipo de conflito que passa despercebido. */
+  function initSectionReveals() {
+    if (!window.ScrollTrigger) {
+      /* GSAP veio mas o plugin não: mostra a seção em vez de deixá-la oculta. */
+      root.classList.remove('js-reveal');
+      return;
+    }
+    gsap.registerPlugin(window.ScrollTrigger);
+
+    var headTrigger = { trigger: '.services__head', start: 'top 78%', once: true };
+
+    /* Título por linhas, dentro das máscaras (mesma gramática da Hero) */
+    gsap.fromTo('.services__line',
+      { yPercent: 110, opacity: 1 },
+      { yPercent: 0, duration: 0.9, stagger: 0.08, ease: 'power4.out',
+        immediateRender: true, scrollTrigger: headTrigger });
+
+    /* Parágrafo de apoio e cápsulas */
+    gsap.fromTo('[data-reveal="lede"], [data-reveal="nav"]',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out',
+        immediateRender: true, scrollTrigger: headTrigger });
+
+    /* Cards, em cascata */
+    gsap.fromTo('[data-reveal="card"]',
+      { opacity: 0, y: 24, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1,
+        ease: 'power3.out', immediateRender: true,
+        scrollTrigger: { trigger: '.services__grid', start: 'top 85%', once: true } });
   }
 
   /* ========================= PARALLAX DE MOUSE ============================= */
