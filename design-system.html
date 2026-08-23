@@ -1,0 +1,402 @@
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NORTHTRAIL — A Aventura Começa Com o Equipamento Certo</title>
+<!-- fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<!-- Archivo (texto e títulos) + Caveat (classe .script), com @font-face e .woff2 locais -->
+<link href="assets/8eb610601416d89b_css2.css" rel="stylesheet"/>
+<!-- css -->
+<!-- fonte global Archivo, classe .script em Caveat, scroll-behavior e cor de ::selection -->
+<link href="assets/css/typography.css" rel="stylesheet"/>
+<!-- utilitários Tailwind 3.4.17 pré-compilados usados por todas as seções (evita flash sem estilo) -->
+<link href="assets/css/tailwind-utilities.css" rel="stylesheet"/>
+<!-- proteções de layout abaixo de 640px: trava overflow-x e empilha grids marcados -->
+<link href="assets/css/responsive-guards.css" rel="stylesheet"/>
+<!-- head-only js -->
+<!-- runtime Tailwind CDN 3.4.17: gera em tempo de execução os utilitários de classes novas -->
+<script src="assets/176e894661aa9cdc_3.4.17"></script>
+<!-- Lucide: converte cada elemento com data-lucide em SVG inline (nav, cards, story, banners, footer) -->
+<script src="assets/8550d4d51d4046fa_lucide.min.js"></script>
+<!-- GSAP: motor das animações de intro, marquee, reveals e parallax -->
+<script src="assets/28033e449a31ebcc_gsap.min.js"></script>
+<!-- ScrollTrigger: dispara as animações GSAP conforme o scroll -->
+<script src="assets/ad33c2df9ada8a66_ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#f5f1e8] text-stone-900 antialiased overflow-x-hidden">
+<!-- nav -->
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="nav">
+<div class="mx-auto max-w-7xl px-5 lg:px-8">
+<div class="mt-4 flex items-center justify-between rounded-2xl bg-[#f5f1e8]/80 backdrop-blur-xl border border-stone-200/60 px-5 py-3 shadow-sm">
+<a class="flex items-center gap-2 group" href="#">
+<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-stone-900 text-orange-400 transition-transform duration-300 group-hover:rotate-12"><i class="h-4 w-4" data-lucide="mountain-snow"></i></span>
+<span class="text-sm font-bold tracking-widest">NORTHTRAIL</span>
+</a>
+<nav class="hidden lg:flex items-center gap-7 text-xs font-medium text-stone-600">
+<a class="relative py-1 hover:text-stone-900 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full" href="#gear">Vestuário</a>
+<a class="relative py-1 hover:text-stone-900 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full" href="#gear">Camping</a>
+<a class="relative py-1 hover:text-stone-900 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full" href="#gear">Equipamentos</a>
+<a class="relative py-1 hover:text-stone-900 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full" href="#gear">Acessórios</a>
+<a class="relative py-1 hover:text-stone-900 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full" href="#experience">Expedições</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="hidden sm:flex h-9 w-9 items-center justify-center rounded-full text-stone-600 hover:bg-stone-200/70 hover:text-stone-900 transition-all duration-300 hover:scale-105 active:scale-95"><i class="h-4 w-4" data-lucide="search"></i></button>
+<button class="relative flex h-9 w-9 items-center justify-center rounded-full text-stone-600 hover:bg-stone-200/70 hover:text-stone-900 transition-all duration-300 hover:scale-105 active:scale-95"><i class="h-4 w-4" data-lucide="shopping-bag"></i>
+<span class="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-orange-600 text-white text-xs font-semibold">2</span>
+</button>
+<a class="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-orange-600 px-4 py-2 text-xs font-semibold text-white transition-all duration-300 hover:bg-orange-500 hover:shadow-lg hover:shadow-orange-600/30 hover:-translate-y-0.5 active:translate-y-0" href="#gear">Comprar Agora <i class="h-3.5 w-3.5" data-lucide="arrow-up-right"></i></a>
+<button class="lg:hidden flex h-9 w-9 items-center justify-center rounded-full text-stone-700 hover:bg-stone-200/70 transition-colors"><i class="h-5 w-5" data-lucide="menu"></i></button>
+</div>
+</div>
+</div>
+</header>
+<!-- hero -->
+<section class="relative pt-28 lg:pt-36 pb-10 lg:pb-16">
+<div class="mx-auto max-w-7xl px-5 lg:px-8">
+<div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+<div>
+<p class="hero-el flex items-center gap-2 text-xs font-semibold tracking-[0.25em] text-orange-700 uppercase mb-4"><span class="h-px w-8 bg-orange-600"></span> Desde 2011 · Testado em Campo</p>
+<h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] text-stone-900">
+<span class="hero-line block overflow-hidden"><span class="block">A AVENTURA</span></span>
+<span class="hero-line block overflow-hidden"><span class="block">COMEÇA COM O</span></span>
+<span class="hero-line block overflow-hidden"><span class="block text-orange-600">EQUIPAMENTO CERTO<span class="text-stone-900">.</span></span></span>
+</h1>
+</div>
+<p class="hero-el max-w-xs text-sm leading-relaxed text-stone-600">Uma seleção de equipamentos de caça e camping, barracas, roupas outdoor e sistemas de dormir — projetados para quem vai mais longe.</p>
+</div>
+<div class="hero-image relative overflow-hidden rounded-3xl">
+<div class="relative h-[60vh] lg:h-[72vh]">
+<img alt="Trilheiros em uma trilha costeira" class="absolute inset-0 h-[120%] w-full object-cover will-change-transform" id="heroImg" src="assets/000c796f43a3e180_8b994be1-9c61-4b80-ab4f-6989a1.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-stone-950/10 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 lg:bottom-10 lg:left-10 lg:right-10 flex flex-wrap items-end justify-between gap-6">
+<div class="hero-el">
+<p class="script text-2xl text-orange-300 mb-1">para os selvagens</p>
+<a class="group inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-stone-900 transition-all duration-300 hover:bg-orange-600 hover:text-white hover:shadow-2xl hover:shadow-orange-600/40 hover:-translate-y-1 active:translate-y-0" href="#gear">Explorar Coleção
+<span class="flex h-6 w-6 items-center justify-center rounded-full bg-stone-900 text-white transition-all duration-300 group-hover:bg-white group-hover:text-orange-600 group-hover:rotate-45"><i class="h-3.5 w-3.5" data-lucide="arrow-up-right"></i></span>
+</a>
+</div>
+<div class="hero-el hidden md:flex gap-10 text-white">
+<div><p class="text-3xl font-bold tracking-tight">340+</p><p class="text-xs text-white/70 mt-1">Produtos testados em campo</p></div>
+<div><p class="text-3xl font-bold tracking-tight">92k</p><p class="text-xs text-white/70 mt-1">Exploradores equipados</p></div>
+<div><p class="text-3xl font-bold tracking-tight">4.9★</p><p class="text-xs text-white/70 mt-1">Avaliação média</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- marquee -->
+<section class="py-8 border-y border-stone-200 overflow-hidden bg-[#efe9dc]">
+<div class="flex whitespace-nowrap will-change-transform" id="marquee">
+<div class="flex items-center gap-8 pr-8 text-2xl lg:text-4xl font-bold tracking-tight text-stone-900">
+<span>CASACOS IMPERMEÁVEIS</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span class="text-transparent" style="-webkit-text-stroke:1px #1c1917">BARRACAS ULTRALEVES</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span>ISOLAMENTO EM PLUMA</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span class="text-transparent" style="-webkit-text-stroke:1px #1c1917">CALÇADOS DE TRILHA</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span>ÓPTICAS DE CAÇA</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span class="text-transparent" style="-webkit-text-stroke:1px #1c1917">COZINHAS DE CAMPO</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+</div>
+<div aria-hidden="true" class="flex items-center gap-8 pr-8 text-2xl lg:text-4xl font-bold tracking-tight text-stone-900">
+<span>CASACOS IMPERMEÁVEIS</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span class="text-transparent" style="-webkit-text-stroke:1px #1c1917">BARRACAS ULTRALEVES</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span>ISOLAMENTO EM PLUMA</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span class="text-transparent" style="-webkit-text-stroke:1px #1c1917">CALÇADOS DE TRILHA</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span>ÓPTICAS DE CAÇA</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+<span class="text-transparent" style="-webkit-text-stroke:1px #1c1917">COZINHAS DE CAMPO</span><i class="h-6 w-6 text-orange-600" data-lucide="asterisk"></i>
+</div>
+</div>
+</section>
+<!-- gear -->
+<section class="py-20 lg:py-28" id="gear">
+<div class="mx-auto max-w-7xl px-5 lg:px-8">
+<div class="flex flex-wrap items-end justify-between gap-6 mb-12">
+<h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02]">AS MELHORES ROUPAS<br/>PARA VOCÊ <span class="script text-orange-600 text-4xl sm:text-5xl lg:text-6xl font-semibold">em alta</span></h2>
+<div class="reveal flex items-center gap-6">
+<p class="max-w-[220px] text-sm text-stone-600 leading-relaxed"><span class="font-semibold text-stone-900">Roupas prontas para a aventura</span> para impulsionar sua jornada de trilha e camping.</p>
+<div class="hidden sm:flex gap-2">
+<button class="flex h-11 w-11 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition-all duration-300 hover:bg-stone-900 hover:text-white hover:border-stone-900 hover:-translate-x-0.5 active:scale-95"><i class="h-4 w-4" data-lucide="arrow-left"></i></button>
+<button class="flex h-11 w-11 items-center justify-center rounded-full bg-stone-900 text-white transition-all duration-300 hover:bg-orange-600 hover:translate-x-0.5 active:scale-95"><i class="h-4 w-4" data-lucide="arrow-right"></i></button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<article class="card group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl bg-white">
+<img alt="Jaqueta Summit Storm" class="h-72 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" src="assets/fead3c3d354ea503_dcc994dd-4df8-4202-a1e0-9ca344.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+<div class="absolute inset-x-3 bottom-3 translate-y-14 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+<button class="w-full rounded-xl bg-stone-900 py-3 text-xs font-semibold text-white transition-colors hover:bg-orange-600">Adicionar ao Carrinho</button>
+</div>
+<div class="absolute top-3 left-3 flex gap-1.5"><span class="h-3.5 w-3.5 rounded-full bg-stone-700 ring-2 ring-white"></span><span class="h-3.5 w-3.5 rounded-full bg-emerald-800 ring-2 ring-white"></span><span class="h-3.5 w-3.5 rounded-full bg-amber-700 ring-2 ring-white"></span></div>
+</div>
+<div class="pt-4 flex items-start justify-between">
+<div>
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Jaqueta Summit Storm</h3>
+<div class="mt-1 flex items-center gap-1.5 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i></span>(112 avaliações)</div>
+</div>
+<p class="text-sm font-bold text-stone-900">$159.00</p>
+</div>
+</article>
+<article class="card group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl bg-white">
+<img alt="Corta-Vento Trailhead" class="h-72 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" src="assets/4c49fdfffcc6048d_f92285a1-e63f-4813-9ae7-7813b1.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+<div class="absolute inset-x-3 bottom-3 translate-y-14 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+<button class="w-full rounded-xl bg-stone-900 py-3 text-xs font-semibold text-white transition-colors hover:bg-orange-600">Adicionar ao Carrinho</button>
+</div>
+<div class="absolute top-3 left-3 flex gap-1.5"><span class="h-3.5 w-3.5 rounded-full bg-lime-700 ring-2 ring-white"></span><span class="h-3.5 w-3.5 rounded-full bg-stone-900 ring-2 ring-white"></span></div>
+</div>
+<div class="pt-4 flex items-start justify-between">
+<div>
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Corta-Vento Trailhead</h3>
+<div class="mt-1 flex items-center gap-1.5 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3" data-lucide="star"></i></span>(67 avaliações)</div>
+</div>
+<p class="text-sm font-bold text-stone-900">$189.00</p>
+</div>
+</article>
+<article class="card group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl bg-white">
+<img alt="Segunda Pele Ridge Crew" class="h-72 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" src="assets/a5d3c002843ed219_08d68571-7829-4587-8a36-bbe61f.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+<div class="absolute inset-x-3 bottom-3 translate-y-14 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+<button class="w-full rounded-xl bg-stone-900 py-3 text-xs font-semibold text-white transition-colors hover:bg-orange-600">Adicionar ao Carrinho</button>
+</div>
+<span class="absolute top-3 left-3 rounded-full bg-orange-600 px-2.5 py-1 text-xs font-semibold text-white">Novo</span>
+</div>
+<div class="pt-4 flex items-start justify-between">
+<div>
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Segunda Pele Ridge Crew</h3>
+<div class="mt-1 flex items-center gap-1.5 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i></span>(203 avaliações)</div>
+</div>
+<p class="text-sm font-bold text-stone-900">$74.00</p>
+</div>
+</article>
+<article class="card group cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl bg-white">
+<img alt="Camisa Timber Bush" class="h-72 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" src="assets/2ce8f80a837382d9_c02def94-57b2-4289-8c27-b0925f.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+<div class="absolute inset-x-3 bottom-3 translate-y-14 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+<button class="w-full rounded-xl bg-stone-900 py-3 text-xs font-semibold text-white transition-colors hover:bg-orange-600">Adicionar ao Carrinho</button>
+</div>
+<div class="absolute top-3 left-3 flex gap-1.5"><span class="h-3.5 w-3.5 rounded-full bg-emerald-900 ring-2 ring-white"></span><span class="h-3.5 w-3.5 rounded-full bg-stone-500 ring-2 ring-white"></span></div>
+</div>
+<div class="pt-4 flex items-start justify-between">
+<div>
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Camisa Timber Bush</h3>
+<div class="mt-1 flex items-center gap-1.5 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3" data-lucide="star"></i></span>(48 avaliações)</div>
+</div>
+<p class="text-sm font-bold text-stone-900">$96.00</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- story -->
+<section class="relative bg-stone-950 text-white" id="story">
+<div class="lg:grid lg:grid-cols-2">
+<div class="sticky top-0 h-[55vh] lg:h-screen overflow-hidden">
+<img alt="Floresta" class="story-img absolute inset-0 h-full w-full object-cover opacity-100" data-step="0" src="assets/3d62b4a981bd80d2_1beb782a-2314-4839-895b-e87a32.png"/>
+<img alt="Fogueira" class="story-img absolute inset-0 h-full w-full object-cover opacity-0" data-step="1" src="assets/973618da15453966_9ad35cbc-9432-4cc3-8a25-ec546b.png"/>
+<img alt="Pico alpino" class="story-img absolute inset-0 h-full w-full object-cover opacity-0" data-step="2" src="assets/f1858632810b9993_e8f45063-7eb7-4a18-875c-f9cd5f.png"/>
+<div class="absolute inset-0 bg-gradient-to-r from-stone-950/70 via-stone-950/20 to-stone-950/80 lg:bg-gradient-to-r lg:from-transparent lg:to-stone-950"></div>
+<div class="absolute bottom-6 left-6 flex items-center gap-3">
+<span class="story-counter text-5xl font-bold tracking-tight text-orange-500">01</span>
+<span class="text-sm text-white/60">/ 03</span>
+</div>
+</div>
+<div class="relative px-5 lg:px-16">
+<div class="story-step flex min-h-[80vh] lg:min-h-screen flex-col justify-center py-20">
+<p class="text-xs font-semibold tracking-[0.3em] text-orange-500 uppercase mb-5">01 — Tecido de Engenharia</p>
+<h3 class="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6">FEITO PARA CLIMAS <span class="text-orange-500">EXTREMOS</span></h3>
+<p class="max-w-md text-sm lg:text-base leading-relaxed text-white/60 mb-8">Cada casaco é laminado com uma membrana de 3 camadas com resistência de 28.000mm — porque a tempestade não se importa com os seus planos. O isolamento sintético mantém o volume mesmo encharcado.</p>
+<div class="flex flex-wrap gap-3">
+<span class="rounded-full border border-white/20 px-4 py-2 text-xs font-medium text-white/80">Impermeável 28k</span>
+<span class="rounded-full border border-white/20 px-4 py-2 text-xs font-medium text-white/80">Costuras Totalmente Seladas</span>
+<span class="rounded-full border border-white/20 px-4 py-2 text-xs font-medium text-white/80">Certificado -30°C</span>
+</div>
+</div>
+<div class="story-step flex min-h-[80vh] lg:min-h-screen flex-col justify-center py-20">
+<p class="text-xs font-semibold tracking-[0.3em] text-orange-500 uppercase mb-5">02 — Sistemas de Acampamento</p>
+<h3 class="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6">DURMA SELVAGEM, <span class="text-orange-500">ACORDE</span> PRONTO</h3>
+<p class="max-w-md text-sm lg:text-base leading-relaxed text-white/60 mb-8">Barracas ultraleves, edredons de pluma e fogareiros ultrarrápidos que ocupam quase nada. Nosso kit completo de acampamento pesa menos de 4,2kg — carregado e testado ao longo de 1.800km de trilha.</p>
+<div class="flex flex-wrap gap-3">
+<span class="rounded-full border border-white/20 px-4 py-2 text-xs font-medium text-white/80">Kit Completo 4,2kg</span>
+<span class="rounded-full border border-white/20 px-4 py-2 text-xs font-medium text-white/80">Fervura em 90s</span>
+<span class="rounded-full border border-white/20 px-4 py-2 text-xs font-medium text-white/80">Pluma 800-Fill</span>
+</div>
+</div>
+<div class="story-step flex min-h-[80vh] lg:min-h-screen flex-col justify-center py-20">
+<p class="text-xs font-semibold tracking-[0.3em] text-orange-500 uppercase mb-5">03 — Comprovado Acima da Linha das Árvores</p>
+<h3 class="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6">TESTADO A <span class="text-orange-500">5.400M</span> DE ALTITUDE</h3>
+<p class="max-w-md text-sm lg:text-base leading-relaxed text-white/60 mb-8">Os protótipos são enviados a guias na Patagônia, nas Montanhas Rochosas e nos Alpes antes de qualquer lançamento. Se falha lá em cima, nunca chega até você aqui embaixo.</p>
+<a class="group inline-flex w-fit items-center gap-3 rounded-full bg-orange-600 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-orange-500 hover:shadow-2xl hover:shadow-orange-600/30 hover:-translate-y-1 active:translate-y-0" href="#gear">Explorar Jaquetas
+<i class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" data-lucide="arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- featured-gear -->
+<section class="py-20 lg:py-28">
+<div class="mx-auto max-w-7xl px-5 lg:px-8">
+<div class="flex flex-wrap items-end justify-between gap-6 mb-12">
+<div>
+<h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02]">EQUIPAMENTOS DE<br/>CAÇA E CAMPING<span class="text-orange-600">.</span></h2>
+</div>
+<div class="reveal flex flex-col items-start sm:items-end gap-4">
+<p class="max-w-[240px] text-sm text-stone-600 leading-relaxed sm:text-right">Compre equipamentos de <span class="font-semibold text-stone-900">caça e camping</span> com desconto — acumule pontos de recompensa a cada real gasto.</p>
+<div class="flex gap-2">
+<button class="filter-pill rounded-full border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-600 transition-all duration-300 hover:border-stone-900 hover:text-stone-900 active:scale-95">Em Promoção</button>
+<button class="filter-pill rounded-full bg-stone-900 px-4 py-2 text-xs font-semibold text-white transition-all duration-300 active:scale-95">Destaques</button>
+<button class="filter-pill rounded-full border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-600 transition-all duration-300 hover:border-stone-900 hover:text-stone-900 active:scale-95">Novidades</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<article class="card group cursor-pointer rounded-2xl bg-white p-4 transition-all duration-500 hover:shadow-xl hover:shadow-stone-900/5 hover:-translate-y-1">
+<div class="relative overflow-hidden rounded-xl bg-stone-100">
+<img alt="Jaqueta Defender" class="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110" src="assets/e70ad58f45a613c9_e235552e-a304-4128-ad7c-45a915.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+</div>
+<div class="pt-4">
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Jaqueta Defender</h3>
+<div class="mt-1.5 flex items-center justify-between">
+<p class="text-sm font-bold">$148.00</p>
+<div class="flex items-center gap-1 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i></span>(38)</div>
+</div>
+</div>
+</article>
+<article class="card group cursor-pointer rounded-2xl bg-white p-4 transition-all duration-500 hover:shadow-xl hover:shadow-stone-900/5 hover:-translate-y-1">
+<div class="relative overflow-hidden rounded-xl bg-stone-100">
+<img alt="Mochila Scout Pro" class="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110" src="assets/fbdd2b3b559c6435_c8d45685-528d-495b-93f5-06c560.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-red-500 transition-all duration-300 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+</div>
+<div class="pt-4">
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Mochila Scout Pro</h3>
+<div class="mt-1.5 flex items-center justify-between">
+<p class="text-sm font-bold">$36.00</p>
+<div class="flex items-center gap-1 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i></span>(29)</div>
+</div>
+</div>
+</article>
+<article class="card group cursor-pointer rounded-2xl bg-white p-4 transition-all duration-500 hover:shadow-xl hover:shadow-stone-900/5 hover:-translate-y-1">
+<div class="relative overflow-hidden rounded-xl bg-stone-100">
+<img alt="Fogareiro Ember Jet" class="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110" src="assets/1f507f3cbb4100bd_2a7ff707-08c3-4de9-b790-66d89d.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+</div>
+<div class="pt-4">
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Fogareiro Ember Jet</h3>
+<div class="mt-1.5 flex items-center justify-between">
+<p class="text-sm font-bold">$52.00</p>
+<div class="flex items-center gap-1 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i></span>(56)</div>
+</div>
+</div>
+</article>
+<article class="card group cursor-pointer rounded-2xl bg-white p-4 transition-all duration-500 hover:shadow-xl hover:shadow-stone-900/5 hover:-translate-y-1">
+<div class="relative overflow-hidden rounded-xl bg-stone-100">
+<img alt="Botas Ridge Trail" class="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110" src="assets/ac62533c833bc708_234d0c74-0ea2-414f-aa8e-3c9209.png"/>
+<button class="wish absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-stone-600 transition-all duration-300 hover:text-red-500 hover:scale-110 active:scale-90"><i class="h-4 w-4" data-lucide="heart"></i></button>
+</div>
+<div class="pt-4">
+<h3 class="text-sm font-bold tracking-wide uppercase group-hover:text-orange-700 transition-colors">Botas Ridge Trail</h3>
+<div class="mt-1.5 flex items-center justify-between">
+<p class="text-sm font-bold">$129.00</p>
+<div class="flex items-center gap-1 text-xs text-stone-500"><span class="flex text-amber-500"><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i><i class="h-3 w-3 fill-current" data-lucide="star"></i></span>(27)</div>
+</div>
+</div>
+</article>
+</div>
+<!-- promo-banners -->
+<div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-5">
+<div class="banner group relative lg:col-span-3 overflow-hidden rounded-3xl bg-sky-200 p-8 lg:p-12 min-h-[280px] flex flex-col justify-center cursor-pointer">
+<img alt="Caçador com equipamento de campo" class="absolute right-0 top-0 h-full w-1/2 object-cover transition-transform duration-700 group-hover:scale-105 [mask-image:linear-gradient(to_right,transparent,black_40%)]" src="assets/04663fa072f95d30_2aa8f459-c7c7-4376-9347-dcd3f7.png"/>
+<div class="relative max-w-xs">
+<p class="text-xs font-semibold tracking-[0.25em] text-sky-900/70 uppercase mb-3">Equipamento de Caça</p>
+<p class="script text-3xl text-orange-600 mb-1">para caçadores</p>
+<h3 class="text-2xl lg:text-4xl font-bold tracking-tight leading-tight text-stone-900 mb-6">VESTUÁRIO PREMIUM PROJETADO SÓ PARA CAÇADORES</h3>
+<span class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-stone-900 group-hover:text-orange-700 transition-colors">Comprar Agora <i class="h-4 w-4" data-lucide="arrow-right"></i></span>
+</div>
+</div>
+<div class="banner group relative lg:col-span-2 overflow-hidden rounded-3xl bg-lime-300 p-8 lg:p-12 min-h-[280px] flex flex-col justify-center cursor-pointer">
+<img alt="Colete puffer" class="absolute right-0 top-0 h-full w-1/2 object-cover transition-transform duration-700 group-hover:scale-105 [mask-image:linear-gradient(to_right,transparent,black_50%)]" src="assets/41ebb2d974cdc369_732b0dee-d846-4336-9f94-989ee2.png"/>
+<div class="relative max-w-[180px]">
+<h3 class="text-2xl lg:text-3xl font-bold tracking-tight leading-tight text-stone-900 mb-3">JAQUETAS E COLETES</h3>
+<p class="text-sm text-stone-800/80 leading-relaxed mb-6">A Ridgeline Polar X: <span class="font-semibold">uma puffer quente e resistente</span>, perfeita para aventuras.</p>
+<span class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-stone-900 group-hover:text-orange-700 transition-colors">Ver Jaquetas <i class="h-4 w-4" data-lucide="arrow-right"></i></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- experience -->
+<section class="relative overflow-hidden bg-gradient-to-b from-[#f5f1e8] via-sky-100 to-sky-200 pt-24 pb-0" id="experience">
+<div class="text-center">
+<p class="script exp-script text-4xl lg:text-5xl text-orange-600 mb-2">a montanha está chamando</p>
+<h2 class="text-[18vw] leading-none font-bold tracking-tight text-white select-none will-change-transform" id="expTitle" style="text-shadow:0 10px 60px rgba(0,0,0,.08)">EXPERIÊNCIA</h2>
+</div>
+<div class="relative -mt-[9vw]">
+<img alt="Cordilheira nevada ao entardecer" class="h-[70vh] lg:h-[90vh] w-full object-cover will-change-transform" id="mountain" src="assets/e9440adc37be76a5_7fc9f744-a82c-4b75-859e-8bf3c4.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent"></div>
+<div class="absolute bottom-10 lg:bottom-16 inset-x-0 px-5">
+<div class="mx-auto max-w-3xl text-center text-white">
+<p class="exp-cta text-sm lg:text-base text-white/80 leading-relaxed mb-6 max-w-lg mx-auto">Junte-se a 92.000 exploradores que confiam em nossos equipamentos em cumes, cristas e vales de rios pelo mundo todo.</p>
+<a class="exp-cta group inline-flex items-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold text-stone-900 transition-all duration-300 hover:bg-orange-600 hover:text-white hover:shadow-2xl hover:shadow-orange-600/40 hover:-translate-y-1 active:translate-y-0" href="#gear">Comece Sua Expedição
+<span class="flex h-6 w-6 items-center justify-center rounded-full bg-stone-900 text-white transition-all duration-300 group-hover:bg-white group-hover:text-orange-600 group-hover:rotate-45"><i class="h-3.5 w-3.5" data-lucide="arrow-up-right"></i></span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- footer -->
+<footer class="bg-stone-950 text-white">
+<div class="mx-auto max-w-7xl px-5 lg:px-8 py-16 lg:py-20">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+<div class="col-span-2 md:col-span-1">
+<a class="flex items-center gap-2 mb-4" href="#">
+<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-stone-900"><i class="h-4 w-4" data-lucide="mountain-snow"></i></span>
+<span class="text-sm font-bold tracking-widest">NORTHTRAIL</span>
+</a>
+<p class="text-sm text-white/50 leading-relaxed">Equipamentos projetados para performar — caça, camping e outdoor desde 2011.</p>
+<div class="mt-5 flex gap-2">
+<a class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:bg-white hover:text-stone-900 hover:-translate-y-0.5" href="#"><i class="h-4 w-4" data-lucide="instagram"></i></a>
+<a class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:bg-white hover:text-stone-900 hover:-translate-y-0.5" href="#"><i class="h-4 w-4" data-lucide="youtube"></i></a>
+<a class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:bg-white hover:text-stone-900 hover:-translate-y-0.5" href="#"><i class="h-4 w-4" data-lucide="twitter"></i></a>
+</div>
+</div>
+<div>
+<p class="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">Loja</p>
+<ul class="space-y-3 text-sm text-white/60">
+<li><a class="hover:text-white transition-colors" href="#">Jaquetas e Casacos</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Barracas e Abrigos</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Sistemas de Dormir</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Cozinha de Campo</a></li>
+</ul>
+</div>
+<div>
+<p class="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">Empresa</p>
+<ul class="space-y-3 text-sm text-white/60">
+<li><a class="hover:text-white transition-colors" href="#">Nossa História</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Testes em Campo</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Sustentabilidade</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Carreiras</a></li>
+</ul>
+</div>
+<div>
+<p class="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">Notas da Trilha</p>
+<p class="text-sm text-white/50 mb-4">Lançamentos mensais e histórias de expedição.</p>
+<div class="flex rounded-full border border-white/15 p-1 focus-within:border-orange-500 transition-colors">
+<input class="w-full bg-transparent px-4 text-sm text-white placeholder-white/30 outline-none" placeholder="voce@acampamento.com" type="email"/>
+<button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white transition-all duration-300 hover:bg-orange-500 hover:rotate-45 active:scale-90"><i class="h-4 w-4" data-lucide="arrow-up-right"></i></button>
+</div>
+</div>
+</div>
+<div class="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-white/40">
+<p>© 2025 Northtrail Supply Co. Todos os direitos reservados.</p>
+<div class="flex gap-6"><a class="hover:text-white transition-colors" href="#">Privacidade</a><a class="hover:text-white transition-colors" href="#">Termos</a><a class="hover:text-white transition-colors" href="#">Envio</a></div>
+</div>
+</div>
+</footer>
+<!-- js -->
+<!-- inicializa os ícones Lucide e todas as animações GSAP/ScrollTrigger da página: intro do hero, parallax, marquee, reveals, troca de imagem do story, cinemática da seção experience, sombra do nav e microinteração da wishlist -->
+<script src="assets/js/animations.js"></script>
+</body></html>

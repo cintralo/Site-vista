@@ -1,0 +1,557 @@
+/* =============================================================================
+   VISTA — HOSPITAL DA CATARATA · Hero
+   Ordem: 1 tokens · 2 reset · 3 layout · 4 componentes · 5 animações · 6 media
+   -----------------------------------------------------------------------------
+   NOTA SOBRE OS TOKENS
+   design-system.html não declara nenhuma custom property: é Tailwind 3.4.17 em
+   utilitários. Os valores abaixo foram extraídos das classes usadas lá; os NOMES
+   das variáveis são desta folha. Tudo que não existia no DS está marcado [NOVO].
+   ========================================================================== */
+
+/* ============================ 1. TOKENS ================================== */
+:root {
+  /* --- cor: superfícies (DS: bg-[#f5f1e8], bg-[#efe9dc], bg-white) --- */
+  --color-bg:            #f5f1e8;
+  --color-bg-alt:        #efe9dc;
+  --color-surface:       #ffffff;
+
+  /* --- cor: tinta (DS: stone-950/900/600/500) --- */
+  --color-ink:           #1c1917;
+  --color-ink-deep:      #0c0a09;
+  --color-ink-soft:      #57534e;  /* 6,8:1 sobre --color-bg  → AA */
+  --color-ink-mute:      #78716c;  /* 4,3:1 sobre --color-bg  → só decorativo */
+
+  /* --- cor: linhas (DS: stone-200/300) --- */
+  --color-line:          #e7e5e4;
+  --color-line-strong:   #d6d3d1;
+
+  /* --- cor: destaque (DS: orange-700/600/500/300) --- */
+  --color-accent:        #ea580c;  /* 3,2:1 sobre bg → só texto grande (AA large) */
+  --color-accent-hover:  #f97316;
+  --color-accent-ink:    #c2410c;  /* 4,6:1 sobre bg → liberado p/ texto pequeno */
+  --color-accent-soft:   #fdba74;
+
+  /* [NOVO] laranja amostrado do arquivo logo-vista.png — referência de marca */
+  --color-brand-logo:    #eb5d2a;
+  /* [NOVO] véus translúcidos derivados do destaque */
+  --color-accent-veil:   rgba(234, 88, 12, 0.07);
+  --color-ink-veil:      rgba(28, 25, 23, 0.06);
+
+  /* --- tipografia (DS: Archivo) --- */
+  --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+  --fw-black:   800;              /* [NOVO] DS para em 700; h1 pede peso máximo */
+
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-lg:   1.125rem;  /* 18 */
+
+  /* [NOVO] escala fluida. A headline usa duas curvas: aqui a de mobile,
+     e outra dentro do breakpoint ≥900px (ver §6) porque lá ela é medida
+     contra 55% da viewport, não contra a viewport inteira. */
+  --text-headline: clamp(1.75rem, 7.2vw, 3.4rem);
+  --text-lede:     clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
+
+  --tracking-tight:  -0.025em;   /* DS tracking-tight   */
+  --tracking-wide:    0.025em;   /* DS tracking-wide    */
+  --tracking-widest:  0.25em;    /* DS tracking-[0.25em]*/
+  /* [NOVO] a headline pede tracking negativo mais firme que o -0.025em do DS */
+  --tracking-headline: -0.035em;
+
+  --leading-headline: 1.02;      /* DS leading-[1.02] */
+  --leading-relaxed:  1.625;     /* DS leading-relaxed */
+
+  /* --- espaçamento (DS: escala Tailwind base 4px) --- */
+  --space-1:  0.25rem;  --space-2:  0.5rem;   --space-3: 0.75rem;
+  --space-4:  1rem;     --space-5:  1.25rem;  --space-6: 1.5rem;
+  --space-8:  2rem;     --space-10: 2.5rem;   --space-12: 3rem;
+  --space-16: 4rem;     --space-20: 5rem;
+
+  /* --- raio (DS: rounded-lg/xl/2xl/3xl/full) --- */
+  --radius-lg:  0.5rem;
+  --radius-xl:  0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* --- sombra (DS) --- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-accent: 0 18px 40px -12px rgb(194 65 12 / 0.35);  /* DS: shadow-orange-600/30 */
+
+  /* --- movimento --- */
+  --dur-1: 300ms;   /* DS duration-300 */
+  --dur-2: 500ms;   /* DS duration-500 */
+  --dur-3: 700ms;   /* DS duration-700 */
+  --dur-reveal: 1200ms;                       /* [NOVO] DS não passa de 700ms */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);     /* DS ease-out */
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);   /* DS default  */
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1); /* [NOVO] expo-out da entrada */
+
+  /* --- layout do split [NOVO] --- */
+  --hero-col-media:   45%;
+  --hero-col-content: 55%;
+  --hero-pad-x: clamp(1.25rem, 4vw, 5rem);     /* DS px-5 → lg:px-8, esticado */
+  --hero-pad-y: clamp(1.5rem, 4vh, 4rem);
+
+  /* --- textura [NOVO] --- */
+  --grain-opacity: 0.03;
+
+  /* --- foco [NOVO]: o design system não define nenhum estado de foco --- */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 3px;
+  --focus-ring-color: var(--color-accent-ink);
+}
+
+/* ============================ 2. RESET =================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+h1, p, figure, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* Foco visível único e consistente — ausente no design system. */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-lg);
+}
+
+/* ============================ 3. LAYOUT ================================== */
+.hero {
+  position: relative;
+  /* isolation mantém as camadas decorativas contidas nesta seção; o background
+     próprio evita que a Hero dependa da cor pintada pelo <body>. */
+  isolation: isolate;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  min-height: 100dvh;          /* evita o "pulo" da barra de endereço no mobile */
+  overflow: hidden;
+  display: flex;
+}
+
+.hero__grid {
+  position: relative;
+  /* sem z-index de propósito: a ordem no DOM (glow, grain, grid) já pinta a
+     grid por cima, sem precisar criar mais um contexto de empilhamento. */
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto 1fr;   /* mobile: foto em cima, conteúdo embaixo */
+}
+
+/* --- fundo: gradiente radial quente atrás do bloco de texto --- */
+.hero__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 72% 38%, var(--color-accent-veil), transparent 68%),
+    radial-gradient(60% 50% at 78% 76%, rgb(255 255 255 / 0.55), transparent 70%);
+}
+
+/* --- fundo: grain. SVG feTurbulence inline: 0 requisições, ~0.3 KB --- */
+.hero__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* ============================ 4. COMPONENTES ============================= */
+
+/* ---------- 4.1 Retrato ---------- */
+.hero__media {
+  position: relative;
+  overflow: hidden;
+  /* mobile: faixa que respira com a altura do aparelho, com piso e teto.
+     28dvh (era 32dvh): a logo em dobro custou ~38px de altura e essa faixa
+     devolve o equivalente, mantendo a última fila de pills na mesma posição
+     relativa à dobra num 375x812. */
+  height: clamp(170px, 28dvh, 300px);
+}
+.hero__photo {
+  /* absoluto em vez de height:100%: assim a altura não depende de o grid item
+     esticado resolver porcentagem — funciona igual na faixa de altura fixa do
+     mobile e na coluna esticada do desktop. */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 46% empurra o rosto para a faixa 100% opaca da máscara no desktop e evita
+     cortar a orelha esquerda quando a coluna fica estreita (~900px). */
+  object-position: 46% 50%;
+  transform-origin: 42% 45%;   /* escala e parallax pivotam no rosto */
+  will-change: transform;
+  /* mobile: dissolve só a base */
+  --photo-mask: linear-gradient(to bottom, #000 0 60%, transparent 100%);
+  -webkit-mask-image: var(--photo-mask);
+          mask-image: var(--photo-mask);
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+/* Chip de identificação sobre a foto */
+.hero__credit {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  border-radius: var(--radius-full);
+  /* fundo próprio: garante AA independente do trecho da foto atrás */
+  background: rgb(245 241 232 / 0.82);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  line-height: 1.25;
+}
+.hero__credit-name { font-size: var(--text-sm); font-weight: var(--fw-semibold); }
+.hero__credit-role { font-size: var(--text-xs); color: var(--color-ink-soft); }
+
+/* ---------- 4.2 Coluna de conteúdo ---------- */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--hero-pad-x) var(--hero-pad-y);
+}
+
+/* ---------- 4.3 Logo ---------- */
+.hero__brand {
+  display: inline-block;
+  border-radius: var(--radius-lg);
+  /* centralizada no bloco de texto: o único elemento fora do eixo à esquerda.
+     align-self vence o align-items:flex-start do contêiner flex. */
+  align-self: center;
+}
+.hero__logo {
+  width: auto;
+  /* 2x a escala anterior (era 38–48px) */
+  height: clamp(76px, 6.8vw, 100px);
+  /* Sem mix-blend-mode aqui, de propósito. O arquivo original tem fundo branco
+     opaco e a versão -clean tem alfa de verdade, então o fundo da página aparece
+     sozinho. Blend seria frágil: o GSAP deixa `transform: translate(0px,0px)`
+     inline neste elemento ao terminar a entrada, e qualquer transform diferente
+     de none cria contexto de empilhamento — o que isolaria o blend do fundo e
+     traria a placa branca de volta depois da animação. */
+}
+
+/* ---------- 4.4 Eyebrow ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  /* orange-700 e não orange-600: em 12px o 600 dá 3,2:1 e reprova AA */
+  color: var(--color-accent-ink);
+}
+.eyebrow__rule {
+  width: 2rem; height: 1px; flex: none;
+  background: currentColor; opacity: 0.6;
+}
+.eyebrow__text { display: inline-block; }
+
+/* ---------- 4.5 Headline ---------- */
+.headline {
+  font-size: var(--text-headline);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--tracking-headline);
+  line-height: var(--leading-headline);
+  /* Sem max-width: as duas linhas são autoradas e a escala em clamp() já
+     garante que cada uma cabe inteira em 375px, 768px, 1440px e 1920px.
+     Um max-width em ch aqui forçaria uma terceira linha e quebraria a máscara. */
+  text-wrap: balance;
+}
+.line-mask {
+  display: block;
+  overflow: hidden;
+  /* espaço para descendentes (ç, g) não serem cortados pela máscara */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+/* quando o SplitText assume, ele cria as próprias máscaras: desligo as minhas
+   para não haver dois recortes concorrentes na mesma caixa */
+.headline.is-split .line-mask { overflow: visible; padding-bottom: 0; margin-bottom: 0; }
+.headline__line { display: block; }
+.headline__line--accent,
+.headline__line--accent * { color: var(--color-accent); }
+
+/* ---------- 4.6 Parágrafo ---------- */
+.lede {
+  max-width: 52ch;
+  font-size: var(--text-lede);
+  line-height: var(--leading-relaxed);
+  color: var(--color-ink-soft);
+}
+
+/* ---------- 4.7 Botões ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  width: 100%;
+  margin-top: var(--space-2);
+}
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 52px;                       /* alvo de toque confortável */
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition:
+    transform var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-1) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.btn:hover  { transform: translateY(-2px); }   /* DS hover:-translate-y-0.5 */
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn__icon { flex: none; transition: transform var(--dur-1) var(--ease-out); }
+
+/* Primário — sólido.
+   Decisão de contraste: branco sobre orange-600 dá 3,56:1 e REPROVA AA (4,5:1).
+   Então o sólido é tinta (15,9:1) e a marca entra no preenchimento animado em
+   orange-700, que com branco dá 5,2:1 — AA nos dois estados. */
+.btn--primary { background: var(--color-ink); color: #fff; overflow: hidden; }
+.btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-accent-ink);
+  transform: scaleY(0);
+  transform-origin: 50% 100%;             /* preenche a partir da borda inferior */
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.btn--primary:hover::before,
+.btn--primary:focus-visible::before { transform: scaleY(1); }
+.btn--primary:hover { box-shadow: var(--shadow-accent); }
+.btn--primary:hover .btn__icon { transform: translateX(4px); }
+
+/* Secundário — outline */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line-strong);
+}
+.btn--ghost:hover {
+  border-color: var(--color-ink);
+  background: var(--color-ink-veil);
+}
+.btn--ghost .btn__icon { color: var(--color-accent-ink); }
+
+/* ---------- 4.8 Pills ---------- */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem var(--space-4);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-full);
+  /* 14px e não 12px: público de catarata tem acuidade reduzida por definição */
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-ink-soft);           /* 6,8:1 → AA */
+  background: rgb(255 255 255 / 0.45);
+  transition: border-color var(--dur-1) var(--ease-out),
+              background-color var(--dur-1) var(--ease-out);
+}
+.pill::before {
+  content: "";
+  width: 5px; height: 5px; flex: none;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+}
+.pill:hover { border-color: var(--color-accent-soft); background: var(--color-surface); }
+
+/* ---------- 4.9 Indicador de scroll ---------- */
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  border-radius: var(--radius-full);
+  transition: color var(--dur-1) var(--ease-out);
+}
+.scroll-cue:hover { color: var(--color-ink); }
+.scroll-cue__track {
+  position: relative;
+  width: 1px; height: 34px; flex: none;
+  background: linear-gradient(to bottom, var(--color-line-strong), transparent);
+}
+.scroll-cue__dot {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 5px; height: 5px;
+  margin-left: -2.5px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  animation: cue-breathe 2.6s var(--ease-std) infinite;
+}
+
+/* ============================ 5. ANIMAÇÕES =============================== */
+
+/* Loop "respiratório" do indicador */
+@keyframes cue-breathe {
+  0%, 100% { transform: translateY(0);    opacity: 0.35; }
+  50%      { transform: translateY(24px); opacity: 1; }
+}
+
+/* --- Estados iniciais da timeline de entrada ---
+   Só aplicados quando .js-anim está no <html>, e o script inline do <head> só
+   adiciona essa classe se o usuário NÃO pediu movimento reduzido. Logo:
+   • reduced-motion  → nada é escondido, estado final direto;
+   • JS/CDN falhando → o onerror do <script> remove .js-anim e tudo aparece. */
+.js-anim .hero__media { clip-path: inset(0 100% 0 0); }
+.js-anim [data-anim] { opacity: 0; }
+.js-anim [data-anim="headline"] { opacity: 1; }        /* as linhas é que animam */
+.js-anim .headline__line { opacity: 0; }
+
+/* --- prefers-reduced-motion: estado final, sem movimento --- */
+@media (prefers-reduced-motion: reduce) {
+  .js-anim .hero__media,
+  .js-anim [data-anim],
+  .js-anim .headline__line { clip-path: none; opacity: 1; transform: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-cue__dot { top: 12px; opacity: 0.8; }
+}
+
+/* ============================ 6. MEDIA QUERIES =========================== */
+
+/* Abaixo de 900px o recorte é horizontal e o topo da cabeça seria cortado no
+   centro: sobe o enquadramento. E o indicador de scroll sai — em pilha vertical
+   ele custa ~50px de dobra e a própria foto já sinaliza que a página continua. */
+@media (max-width: 899.98px) {
+  /* 42% (e não 50%): numa faixa horizontal, centralizar corta o alto da cabeça.
+     Descer o ponto de ancoragem mostra da testa ao jaleco. */
+  .hero__photo { object-position: 50% 42%; }
+  .scroll-cue { display: none; }
+}
+
+/* Tablet: a faixa é muito mais larga que alta, então o recorte do retrato fica
+   severo. Mais altura devolve o rosto inteiro sem custar a dobra (há folga). */
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .hero__media { height: clamp(300px, 40dvh, 420px); }
+}
+
+/* Telas baixas em retrato: comprime a faixa da foto para o texto caber */
+@media (max-width: 899.98px) and (max-height: 700px) {
+  .hero__media { height: clamp(150px, 24dvh, 220px); }
+  .hero__content { gap: var(--space-3); padding-top: var(--space-5); }
+}
+
+/* Abaixo de 420px os CTAs empilham em largura total; acima disso eles dividem a
+   linha e quebram sozinhos se não couberem (nunca encolhem a ponto de cortar). */
+@media (max-width: 419.98px) {
+  .btn { width: 100%; }
+}
+
+/* ---------------- DESKTOP: split assimétrico ---------------- */
+@media (min-width: 900px) {
+  :root {
+    /* Curva própria: aqui a headline é medida contra ~55vw menos padding.
+       ~3.9vw mantém "A catarata tem cura." em uma linha de 900px a 1920px. */
+    --text-headline: clamp(2.1rem, 3.9vw, 4.9rem);
+  }
+
+  .hero__grid {
+    /* explícito: uma linha que ocupa toda a altura, para a coluna da foto não
+       depender de a linha implícita esticar */
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: var(--hero-col-media) var(--hero-col-content);
+    align-items: stretch;
+  }
+
+  .hero__media { height: auto; }          /* estica os 100dvh da linha do grid */
+
+  .hero__photo {
+    /* Máscara dupla: dissolve a borda direita no fundo (sem linha divisória) e
+       a base, para o retrato "assentar" no cream em vez de ser um retângulo.
+       mask-composite: intersect = interseção das duas; source-in é o legado WebKit. */
+    --photo-mask:
+      linear-gradient(to right, #000 0 58%, transparent 100%),
+      linear-gradient(to bottom, #000 0 84%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-composite: intersect;
+  }
+
+  .hero__credit { left: var(--space-8); bottom: var(--space-10); }
+
+  .hero__content {
+    gap: var(--space-6);
+    padding-block: var(--hero-pad-y);
+    /* respiro extra à esquerda: o texto começa depois da dissolução da foto */
+    padding-left: clamp(1rem, 2vw, 2.5rem);
+  }
+
+  .scroll-cue { margin-top: var(--space-8); }
+}
+
+/* Telas muito largas: trava o crescimento para a linha de leitura não estourar */
+@media (min-width: 1600px) {
+  .hero__content { padding-right: clamp(5rem, 12vw, 14rem); }
+}
+
+/* Preferência de contraste elevado: engrossa as bordas de baixo contraste */
+@media (prefers-contrast: more) {
+  .pill, .btn--ghost { border-color: var(--color-ink-soft); }
+  .lede { color: var(--color-ink); }
+}

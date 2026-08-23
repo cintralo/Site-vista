@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!-- viewport-fit=cover: necessário para que 100dvh cubra a safe-area em iPhones com notch -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vista — Hospital da Catarata | Cirurgia de catarata</title>
+<meta name="description" content="Avaliação e cirurgia de catarata no Vista — Hospital da Catarata. Diagnóstico completo, explicação clara de riscos e alternativas antes de qualquer indicação cirúrgica.">
+<meta name="theme-color" content="#f5f1e8">
+
+<!-- ============================================================
+     PRECONNECT — abre TLS antes do parser chegar nos assets remotos
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+<!-- LCP: o retrato é o maior elemento acima da dobra; sobe na fila de rede -->
+<link rel="preload" as="image" href="assets/Foto%20Dr%20Laet.png" fetchpriority="high">
+
+<!-- Archivo = família do design-system.html. Os .woff2 locais que o DS referencia
+     (assets/8eb610601416d89b_css2.css) NÃO existem neste projeto, então sirvo pela
+     Google Fonts. Pesos 400/500/600/700 são os do DS; 800 é adição minha (h1). -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<!-- Marca o documento como "vai animar" ANTES do primeiro paint, evitando flash do
+     estado final. Só marca quando o usuário aceita movimento: assim, em
+     prefers-reduced-motion, nada é escondido nem depende de JS para aparecer. -->
+<script>
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-anim');
+      }
+    } catch (e) { /* navegador sem matchMedia: segue sem esconder nada */ }
+  })();
+</script>
+
+<!-- ============================================================
+     DEPENDÊNCIAS — 2 arquivos, 79 KB no total. Justificativa de cada uma:
+
+     [1] GSAP 3.13.0 — orquestra a timeline única de entrada. Faz o que CSS não faz
+         bem aqui: sequenciamento com sobreposição negativa, stagger e quickTo
+         (parallax interpolado sem tocar em layout). SRI calculado sobre o arquivo.
+
+     [2] SplitText 3.13.0 — gratuito desde a 3.13. Recorta a headline pelas linhas
+         REALMENTE renderizadas (`mask:"lines"` gera os wrappers overflow:hidden).
+         Ganho real sobre wrappers estáticos: se você trocar a copy da headline ou o
+         texto reflowar em outro breakpoint, a máscara continua correta. Depois da
+         animação eu chamo split.revert() e o DOM volta ao original — nada de linhas
+         congeladas quebrando no resize.
+
+     DESCARTADAS (e por quê):
+     • Lucide — carregar ~30 KB de JS para 2 ícones não se paga, e a substituição
+       de <i data-lucide> por SVG acontece DEPOIS do load, deslocando botões que a
+       timeline já animou. Inlinei os 2 paths do próprio Lucide (grid 24, stroke 2).
+     • SplitType — seria uma 3ª requisição só como paraquedas. O fallback nativo
+       abaixo (spans .line-mask já no HTML) cobre o mesmo caso com 0 KB.
+     • Lenis — a entrega é só a Hero; não há scroll para suavizar. Reavaliar quando
+       a página crescer.
+     • vanilla-tilt — tilt 3D no retrato de um cirurgião empurra o tom para
+       "gadget"; e brigaria com o parallax de mouse que já existe na foto.
+     • Tailwind CDN — geraria utilitários em runtime conflitando com os tokens.
+     ============================================================ -->
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+        integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc"
+        crossorigin="anonymous"
+        onerror="document.documentElement.classList.remove('js-anim')"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"
+        integrity="sha384-xb96EMJeax+NLXMC88ZBa1xAeAW+kn+horHh/zFlbMLG2UPWhMJJSlv7fi57hS+Q"
+        crossorigin="anonymous"></script>
+<script defer src="main.js"></script>
+</head>
+
+<body>
+<header class="hero">
+
+  <!-- Camadas decorativas: gradiente radial quente atrás do bloco de texto + grain -->
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__grain" aria-hidden="true"></div>
+
+  <div class="hero__grid">
+
+    <!-- ---------- COLUNA ESQUERDA (~45%): retrato ---------- -->
+    <!-- Um único PNG disponível em /assets, então <img> simples: <picture> só se
+         justificaria com AVIF/WebP alternativos, que não existem no projeto. -->
+    <figure class="hero__media">
+      <img class="hero__photo"
+           src="assets/Foto%20Dr%20Laet.png"
+           alt="Dr. Laet, de jaleco branco, em retrato de estúdio, sorrindo para a câmera"
+           width="1532" height="1550"
+           loading="eager" fetchpriority="high" decoding="async">
+
+      <!-- Bloco opcional: identifica quem está na foto. Um retrato anônimo na Hero
+           enfraquece a credibilidade. Chip com fundo translúcido garante o contraste
+           independente do trecho da imagem que ficar atrás. Pode ser removido inteiro. -->
+      <figcaption class="hero__credit" data-anim="credit">
+        <span class="hero__credit-name">Dr. Laet</span>
+        <span class="hero__credit-role">{{TITULACAO_DR_LAET}}</span>
+      </figcaption>
+    </figure>
+
+    <!-- ---------- COLUNA DIREITA (~55%): conteúdo ---------- -->
+    <div class="hero__content">
+
+      <!-- 1. LOGO — usa logo-vista-clean.png: derivado de logo-vista.png com
+           fundo branco convertido em transparência real (alfa recuperado por
+           mínimos quadrados sobre a rampa laranja→branco, então as bordas
+           antisserrilhadas ficam limpas) e sem as duas linhas de pixel escuras
+           que o arquivo original trazia no topo. O original segue intacto em
+           /assets. Com alfa de verdade não é preciso nenhum truque de blend. -->
+      <a class="hero__brand" href="#inicio" data-anim="logo">
+        <img class="hero__logo" src="assets/logo-vista-clean.png"
+             alt="Vista — Hospital da Catarata"
+             width="2536" height="926" decoding="async">
+      </a>
+
+      <!-- 2. EYEBROW -->
+      <p class="eyebrow" data-anim="eyebrow">
+        <span class="eyebrow__rule" aria-hidden="true"></span>
+        <span class="eyebrow__text">01 — Cirurgia de catarata</span>
+      </p>
+
+      <!-- 3. HEADLINE
+           Variações prontas para troca (mantenha sempre 2 linhas):
+           B) "Enxergar de novo" / "começa com um diagnóstico."
+           C) "A cirurgia de catarata," / "explicada sem pressa."
+           Os .line-mask são o fallback para quando o SplitText não carrega;
+           com SplitText, o JS adiciona .is-split e desliga essas máscaras. -->
+      <h1 class="headline" data-anim="headline">
+        <span class="line-mask"><span class="headline__line">A catarata tem cura.</span></span>
+        <span class="line-mask"><span class="headline__line headline__line--accent">E ela é cirúrgica.</span></span>
+      </h1>
+
+      <!-- 4. PARÁGRAFO — descreve conduta e processo, sem prometer resultado. -->
+      <p class="lede" data-anim="lede">
+        A catarata turva a visão aos poucos, e o tratamento é cirúrgico. Aqui, a
+        indicação vem depois de uma avaliação completa — exames, cálculo da lente
+        intraocular e uma conversa sem pressa sobre riscos e alternativas.
+      </p>
+
+      <!-- 5. BOTÕES -->
+      <div class="actions" data-anim="actions">
+        <a class="btn btn--primary" href="#agendamento">
+          <span class="btn__label">Agendar avaliação</span>
+          <!-- ícone Lucide "arrow-right" inline -->
+          <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </a>
+        <a class="btn btn--ghost" href="#como-funciona">
+          <!-- ícone Lucide "circle-play" inline -->
+          <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8"/>
+          </svg>
+          <span class="btn__label">Como funciona a cirurgia</span>
+        </a>
+      </div>
+
+      <!-- 6. PILLS DE CREDIBILIDADE — descrições técnicas verificáveis, sem números. -->
+      <ul class="pills" data-anim="pills">
+        <li class="pill">Lentes intraoculares premium</li>
+        <li class="pill">Cirurgia com facoemulsificação</li>
+        <li class="pill">{{CRM}} / {{RQE}}</li>
+      </ul>
+
+      <!-- Indicador de scroll -->
+      <a class="scroll-cue" href="#como-funciona" data-anim="cue">
+        <span class="scroll-cue__track" aria-hidden="true"><span class="scroll-cue__dot"></span></span>
+        <span class="scroll-cue__label">Continuar</span>
+      </a>
+
+    </div>
+  </div>
+</header>
+</body>
+</html>
