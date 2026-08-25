@@ -330,23 +330,12 @@
 
       <li class="unit" data-reveal="unit">
         <article class="unit__card">
-          <!-- SLOT DE FOTO — sem arquivo em /assets, então fica o marcador.
-               Para publicar a foto: coloque o arquivo em /assets e troque este
-               <div class="unit__photo"> inteiro por:
-               <img class="unit__photo" src="assets/NOME-REAL.jpg" width="1600"
-                    height="900" loading="lazy" decoding="async"
-                    alt="Fachada da unidade Taguatinga do Vista — Hospital da Catarata">
-               O width/height é o que evita o pulo de layout quando ela carregar. -->
-          <div class="unit__photo unit__photo--empty" role="img"
-               aria-label="Espaço reservado para a foto da fachada da unidade Taguatinga">
-            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-              <circle cx="9" cy="9" r="2"/>
-              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-            </svg>
-            <span>{{FOTO_FACHADA_TAGUATINGA}}</span>
-          </div>
+          <picture>
+            <source srcset="assets/fachada-taguatinga.webp" type="image/webp">
+            <img class="unit__photo" src="assets/fachada-taguatinga.jpg"
+                 width="908" height="342" loading="lazy" decoding="async"
+                 alt="Fachada da unidade Taguatinga: prédio laranja com o letreiro Vista — Hospital da Catarata e a lista Consultas, Exames e Cirurgias, ao lado da entrada do Centro Médico Marra">
+          </picture>
 
           <div class="unit__body">
             <p class="unit__kicker">Unidade</p>
@@ -389,20 +378,16 @@
 
       <li class="unit" data-reveal="unit">
         <article class="unit__card">
-          <!-- Mesmo procedimento da unidade acima para publicar a foto. -->
-          <div class="unit__photo unit__photo--empty" role="img"
-               aria-label="Espaço reservado para a foto da fachada da unidade Ceilândia">
-            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-              <circle cx="9" cy="9" r="2"/>
-              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-            </svg>
-            <span>{{FOTO_FACHADA_CEILANDIA}}</span>
-          </div>
-          <!-- Selo do print. Faixa diagonal virou pílula, que é o padrão de
-               badge do design system (`rounded-full ... text-white`). -->
-          <span class="unit__badge">Nova</span>
+          <!-- O selo "NOVA" está chapado no próprio arquivo, no canto superior
+               direito. Por isso não há pílula .unit__badge aqui: dois selos na
+               mesma quina seriam um bug visual. A informação continua acessível
+               pelo alt, que menciona a faixa. -->
+          <picture>
+            <source srcset="assets/fachada-ceilandia.webp" type="image/webp">
+            <img class="unit__photo" src="assets/fachada-ceilandia.jpg"
+                 width="908" height="342" loading="lazy" decoding="async"
+                 alt="Fachada da unidade Ceilândia: letreiro Vista — Hospital da Catarata em painel laranja, com uma faixa Nova no canto superior direito">
+          </picture>
 
           <div class="unit__body">
             <p class="unit__kicker">Unidade</p>
