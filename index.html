@@ -93,11 +93,16 @@
     <!-- Um único PNG disponível em /assets, então <img> simples: <picture> só se
          justificaria com AVIF/WebP alternativos, que não existem no projeto. -->
     <figure class="hero__media">
+      <!-- .hero__frame é quem tem a altura e o recorte da foto. A legenda é irmã
+           dela, e não sobreposta: assim no mobile ela desce para baixo da imagem
+           em vez de cair sobre o rosto. -->
+      <div class="hero__frame">
       <img class="hero__photo"
            src="assets/Foto%20Dr%20Laet.png"
            alt="Dr. Laet, de jaleco branco, em retrato de estúdio, sorrindo para a câmera"
            width="1532" height="1550"
            loading="eager" fetchpriority="high" decoding="async">
+      </div>
 
       <!-- Bloco opcional: identifica quem está na foto. Um retrato anônimo na Hero
            enfraquece a credibilidade. Chip com fundo translúcido garante o contraste
