@@ -177,143 +177,131 @@
 <main>
 
 <!-- =========================================================================
-     SEGUNDA DOBRA — SERVIÇOS
-     Estrutura herdada do print de referência (seção "featured-gear" do
-     design-system.html): título em duas linhas à esquerda com ponto final em
-     destaque, bloco de apoio alinhado à direita com parágrafo + fileira de
-     cápsulas, e grade de cards abaixo.
-     Três adaptações conscientes, porque o original é e-commerce e este é médico:
-     • as cápsulas de filtro ("Em Promoção / Destaques / Novidades") viram âncoras
-       reais para os três cards — filtro que não filtra nada seria cenário;
-     • o botão de favoritar no canto do card vira o índice 01/02/03;
-     • preço e avaliação em estrelas saem: nota de paciente é depoimento, vedado
-       pela Res. CFM 1.974/2011. No lugar entra a chamada de ação do card.
-     Não há imagem de serviço em /assets e não invento arquivo: o bloco visual do
-     card usa ícone Lucide inline sobre fundo tonal.
+     SEGUNDA DOBRA — TRAJETO VISTA
+     O mecanismo nomeado da clínica, em três etapas. Deixa explícito que o
+     trajeto vale para qualquer condição ocular, não só catarata.
+     Vocabulário do design-system.html: título em caixa alta com ponto final em
+     destaque, cartão branco com raio/sombra dos tokens, cápsulas no padrão
+     `filter-pill`, botão sólido reaproveitado da Hero.
+     As fotos são derivados otimizados dos originais em /assets (9,7 MB -> 220 KB
+     em WebP), recortados em 4:3 na geração para eu controlar o enquadramento.
+     O id continua "servicos" e a etapa 3 mantém "servico-cirurgias": são os
+     alvos das âncoras da Hero, que esta mudança não deve quebrar.
      ========================================================================= -->
-<section class="services" id="servicos" aria-labelledby="services-title">
-  <div class="services__inner">
+<section class="trajeto" id="servicos" aria-labelledby="trajeto-title">
+  <div class="trajeto__inner">
 
-    <!-- ---------- Cabeçalho da seção ---------- -->
-    <div class="services__head">
-      <h2 class="services__title" id="services-title" data-reveal="title">
-        <span class="line-mask"><span class="services__line">Do diagnóstico</span></span>
-        <span class="line-mask"><span class="services__line">à cirurgia<span class="services__dot">.</span></span></span>
+    <!-- ---------- Cabeçalho ---------- -->
+    <div class="trajeto__head">
+      <h2 class="trajeto__title" id="trajeto-title" data-reveal="trajeto-title">
+        <span class="line-mask"><span class="trajeto__line">Trajeto</span></span>
+        <span class="line-mask"><span class="trajeto__line">Vista<span class="trajeto__dot">.</span></span></span>
       </h2>
-
-      <div class="services__aside">
-        <p class="services__lede" data-reveal="lede">
-          Três frentes que se conectam: a consulta orienta os exames, e os exames
-          definem se — e quando — a cirurgia é indicada.
-        </p>
-        <!-- Âncoras para os cards. Sem estado "ativo" fixo: nenhum dos três é
-             mais importante que os outros, e marcar um seria arbitrário. -->
-        <nav class="services__nav" aria-label="Ir para um serviço" data-reveal="nav">
-          <a class="chip" href="#servico-consultas">Consultas</a>
-          <a class="chip" href="#servico-exames">Exames</a>
-          <a class="chip" href="#servico-cirurgias">Cirurgias</a>
-        </nav>
-      </div>
+      <p class="trajeto__lede" data-reveal="trajeto-lede">
+        Um caminho só, para qualquer condição ocular. A catarata é uma delas —
+        glaucoma, retinopatias e pterígio percorrem as mesmas três etapas, da
+        primeira consulta ao acompanhamento depois do tratamento.
+      </p>
     </div>
 
-    <!-- ---------- Grade de serviços ---------- -->
-    <ul class="services__grid">
-
-      <li class="svc" id="servico-consultas" data-reveal="card">
-        <article class="svc__card">
-          <div class="svc__visual" aria-hidden="true">
-            <!-- Lucide "eye", stroke afinado para 1.25: a 2 o traço fica pesado
-                 neste tamanho e destoa do tom da marca -->
-            <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <span class="svc__index">01</span>
-          </div>
-          <div class="svc__body">
-            <h3 class="svc__title">
-              <a class="svc__link" href="#agendamento">Consultas oftalmológicas</a>
-            </h3>
-            <p class="svc__text">
-              Avaliação clínica e diagnóstico de catarata, retinopatias, glaucoma,
-              pterígio e outras doenças oculares.
-            </p>
-            <span class="svc__cue" aria-hidden="true">
-              Agendar consulta
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-              </svg>
-            </span>
-          </div>
-        </article>
-      </li>
-
-      <li class="svc" id="servico-exames" data-reveal="card">
-        <article class="svc__card">
-          <div class="svc__visual" aria-hidden="true">
-            <!-- Lucide "microscope" -->
-            <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/>
-              <path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/>
-              <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
-            </svg>
-            <span class="svc__index">02</span>
-          </div>
-          <div class="svc__body">
-            <h3 class="svc__title">
-              <a class="svc__link" href="#agendamento">Exames complementares</a>
-            </h3>
-            <p class="svc__text">
-              Parque tecnológico na própria clínica, para os diagnósticos que
-              exigem investigação mais detalhada.
-            </p>
-            <span class="svc__cue" aria-hidden="true">
-              Ver os exames
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-              </svg>
-            </span>
-          </div>
-        </article>
-      </li>
-
-      <li class="svc" id="servico-cirurgias" data-reveal="card">
-        <article class="svc__card">
-          <div class="svc__visual" aria-hidden="true">
-            <!-- Lucide "scan-eye" -->
-            <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-              <path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-              <circle cx="12" cy="12" r="1"/>
-              <path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/>
-            </svg>
-            <span class="svc__index">03</span>
-          </div>
-          <div class="svc__body">
-            <h3 class="svc__title">
-              <a class="svc__link" href="#agendamento">Cirurgias oculares</a>
-            </h3>
-            <p class="svc__text">
-              Catarata, refrativa e pterígio. A indicação vem depois da avaliação e
-              dos exames, e é explicada antes de qualquer decisão.
-            </p>
-            <span class="svc__cue" aria-hidden="true">
-              Entender as cirurgias
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-              </svg>
-            </span>
-          </div>
-        </article>
-      </li>
-
+    <ul class="trajeto__tags" data-reveal="trajeto-tags" aria-label="Condições atendidas">
+      <li class="tag">Catarata</li>
+      <li class="tag">Glaucoma</li>
+      <li class="tag">Retinopatias</li>
+      <li class="tag">Pterígio</li>
+      <li class="tag tag--soft">e outras condições oculares</li>
     </ul>
+
+    <!-- ---------- As três etapas ----------
+         <ol> e não <ul>: a ordem é o conteúdo. O número no marcador é
+         decorativo (aria-hidden) porque a lista ordenada já o comunica. -->
+    <ol class="trajeto__grid">
+
+      <li class="stage" data-reveal="stage">
+        <div class="stage__marker">
+          <span class="stage__num" aria-hidden="true">01</span>
+          <span class="stage__line" aria-hidden="true"></span>
+        </div>
+        <article class="stage__card">
+          <picture>
+            <source srcset="assets/etapa-avaliacao.webp" type="image/webp">
+            <img class="stage__photo" src="assets/etapa-avaliacao.jpg"
+                 width="1400" height="1050" loading="lazy" decoding="async"
+                 alt="Par de óculos segurado à frente de uma tabela de acuidade visual, com as letras nítidas através das lentes">
+          </picture>
+          <div class="stage__body">
+            <h3 class="stage__name">Avaliação</h3>
+            <p class="stage__text">
+              Entendemos seu caso e suas necessidades, levantamos hipóteses e
+              solicitamos exames do nosso extenso parque tecnológico para
+              confirmá-las.
+            </p>
+          </div>
+        </article>
+      </li>
+
+      <li class="stage" data-reveal="stage">
+        <div class="stage__marker">
+          <span class="stage__num" aria-hidden="true">02</span>
+          <span class="stage__line" aria-hidden="true"></span>
+        </div>
+        <article class="stage__card">
+          <picture>
+            <source srcset="assets/etapa-diagnostico.webp" type="image/webp">
+            <img class="stage__photo" src="assets/etapa-diagnostico.jpg"
+                 width="1400" height="1050" loading="lazy" decoding="async"
+                 alt="Autorrefrator e lâmpada de fenda em uma sala de exames da clínica">
+          </picture>
+          <div class="stage__body">
+            <h3 class="stage__name">Diagnóstico</h3>
+            <p class="stage__text">
+              Avaliamos os exames complementares oftalmológicos para entendermos
+              melhor a sua situação específica e propomos então a melhor
+              abordagem, personalizada para você.
+            </p>
+          </div>
+        </article>
+      </li>
+
+      <li class="stage" id="servico-cirurgias" data-reveal="stage">
+        <div class="stage__marker">
+          <span class="stage__num" aria-hidden="true">03</span>
+          <span class="stage__line stage__line--end" aria-hidden="true"></span>
+        </div>
+        <article class="stage__card">
+          <picture>
+            <source srcset="assets/etapa-tratamento.webp" type="image/webp">
+            <img class="stage__photo" src="assets/etapa-tratamento.jpg"
+                 width="1400" height="1050" loading="lazy" decoding="async"
+                 alt="Cirurgião de touca, máscara e avental durante um procedimento no centro cirúrgico">
+          </picture>
+          <div class="stage__body">
+            <h3 class="stage__name">Tratamento</h3>
+            <p class="stage__text">
+              O tratamento de sua condição é realizado em uma de nossas unidades,
+              seja ele clínico ou cirúrgico, com acompanhamento dedicado
+              posteriormente.
+            </p>
+          </div>
+        </article>
+      </li>
+
+    </ol>
+
+    <!-- Fecho da dobra: o trajeto inteiro começa pela etapa 1, então o CTA
+         daqui é o mesmo da Hero. -->
+    <div class="trajeto__cta" data-reveal="trajeto-cta">
+      <p class="trajeto__cta-text">Qualquer que seja a condição, o trajeto começa pela avaliação.</p>
+      <a class="btn btn--primary" href="#agendamento">
+        <span class="btn__label">Agendar avaliação</span>
+        <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </section>
 

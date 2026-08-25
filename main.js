@@ -173,26 +173,33 @@
     }
     gsap.registerPlugin(window.ScrollTrigger);
 
-    var headTrigger = { trigger: '.services__head', start: 'top 78%', once: true };
+    var trajetoHead = { trigger: '.trajeto__head', start: 'top 78%', once: true };
 
     /* Título por linhas, dentro das máscaras (mesma gramática da Hero) */
-    gsap.fromTo('.services__line',
+    gsap.fromTo('.trajeto__line',
       { yPercent: 110, opacity: 1 },
       { yPercent: 0, duration: 0.9, stagger: 0.08, ease: 'power4.out',
-        immediateRender: true, scrollTrigger: headTrigger });
+        immediateRender: true, scrollTrigger: trajetoHead });
 
-    /* Parágrafo de apoio e cápsulas */
-    gsap.fromTo('[data-reveal="lede"], [data-reveal="nav"]',
+    /* Parágrafo de apoio e cápsulas de condições */
+    gsap.fromTo('[data-reveal="trajeto-lede"], [data-reveal="trajeto-tags"]',
       { opacity: 0, y: 16 },
       { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out',
-        immediateRender: true, scrollTrigger: headTrigger });
+        immediateRender: true, scrollTrigger: trajetoHead });
 
-    /* Cards, em cascata */
-    gsap.fromTo('[data-reveal="card"]',
-      { opacity: 0, y: 24, scale: 0.98 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1,
+    /* As três etapas, em cascata — a ordem da animação reforça a do trajeto */
+    gsap.fromTo('[data-reveal="stage"]',
+      { opacity: 0, y: 26, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.75, stagger: 0.12,
         ease: 'power3.out', immediateRender: true,
-        scrollTrigger: { trigger: '.services__grid', start: 'top 85%', once: true } });
+        scrollTrigger: { trigger: '.trajeto__grid', start: 'top 85%', once: true } });
+
+    /* Fecho */
+    gsap.fromTo('[data-reveal="trajeto-cta"]',
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+        immediateRender: true,
+        scrollTrigger: { trigger: '.trajeto__cta', start: 'top 92%', once: true } });
 
     /* ---- terceira dobra: unidades ---- */
     var unitsHead = { trigger: '.units__head', start: 'top 80%', once: true };
