@@ -35,7 +35,6 @@
   var photo    = document.querySelector('.hero__photo');
   var headline = document.querySelector('.headline');
   var lineSpans = headline ? headline.querySelectorAll('.headline__line') : [];
-  var eyebrowText = document.querySelector('.eyebrow__text');
 
   var el = function (sel) { return document.querySelector(sel); };
 
@@ -97,12 +96,6 @@
        Setar os spans originais aqui deixaria a headline invisível. */
     gsap.set(headline.querySelectorAll('.headline__line'), { opacity: 1 });
 
-    /* Letter-spacing final lido do CSS (px), para o tween não depender de um
-       valor hard-coded que divergiria do token --tracking-widest. */
-    var eyebrowLS = eyebrowText
-      ? window.getComputedStyle(eyebrowText).letterSpacing
-      : '0px';
-
     var tl = gsap.timeline({
       defaults: { ease: 'power3.out' },
       onComplete: function () {
@@ -131,43 +124,33 @@
         { opacity: 0, y: -12 },
         { opacity: 1, y: 0, duration: 0.6 }, 0.25)
 
-    /* 3 · Eyebrow: letter-spacing abrindo de 0.5em até o valor do token */
-      .fromTo(el('[data-anim="eyebrow"]'),
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8 }, 0.35)
-      .fromTo(eyebrowText,
-        { letterSpacing: '0.5em' },
-        { letterSpacing: eyebrowLS, duration: 1.1, ease: 'power2.out' }, 0.35)
-
-    /* 4 · Headline: linha a linha, de baixo para cima, dentro da máscara */
+    /* 3 · Headline: linha a linha, de baixo para cima, dentro da máscara.
+       Sem o eyebrow, este é o segundo tempo da timeline e entra mais cedo. */
       .fromTo(lines,
         { yPercent: 110 },
-        { yPercent: 0, duration: 0.95, stagger: 0.08, ease: 'power4.out' }, 0.45)
+        { yPercent: 0, duration: 0.95, stagger: 0.08, ease: 'power4.out' }, 0.4)
 
-    /* 5 · Parágrafo */
+    /* 4 · Parágrafo */
       .fromTo(el('[data-anim="lede"]'),
         { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7 }, 0.78)
+        { opacity: 1, y: 0, duration: 0.7 }, 0.7)
 
-    /* 6 · Botões e pills */
+    /* 5 · Botões */
       .fromTo('.actions .btn',
         { opacity: 0, y: 14, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.07 }, 0.9)
-      .fromTo('.pills .pill',
-        { opacity: 0, y: 10, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.06 }, 1.04)
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.07 }, 0.84)
 
     /* Elementos de apoio */
       .fromTo(el('[data-anim="credit"]'),
         { opacity: 0, x: -12 },
-        { opacity: 1, x: 0, duration: 0.6 }, 1.0)
+        { opacity: 1, x: 0, duration: 0.6 }, 0.95)
       .fromTo(el('[data-anim="cue"]'),
         { opacity: 0, y: -8 },
-        { opacity: 1, y: 0, duration: 0.6 }, 1.2);
+        { opacity: 1, y: 0, duration: 0.6 }, 1.05);
 
-    /* Os wrappers .actions e .pills carregam opacity:0 do CSS; quem anima são os
-       filhos, então libero os contêineres junto com a entrada deles. */
-    gsap.set(['[data-anim="actions"]', '[data-anim="pills"]'], { opacity: 1 });
+    /* O wrapper .actions carrega opacity:0 do CSS; quem anima são os botões,
+       então libero o contêiner junto com a entrada deles. */
+    gsap.set('[data-anim="actions"]', { opacity: 1 });
 
     initSectionReveals();
 
@@ -210,6 +193,25 @@
       { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1,
         ease: 'power3.out', immediateRender: true,
         scrollTrigger: { trigger: '.services__grid', start: 'top 85%', once: true } });
+
+    /* ---- terceira dobra: unidades ---- */
+    var unitsHead = { trigger: '.units__head', start: 'top 80%', once: true };
+
+    gsap.fromTo('.units__line',
+      { yPercent: 110, opacity: 1 },
+      { yPercent: 0, duration: 0.9, stagger: 0.08, ease: 'power4.out',
+        immediateRender: true, scrollTrigger: unitsHead });
+
+    gsap.fromTo('[data-reveal="units-lede"]',
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+        immediateRender: true, scrollTrigger: unitsHead });
+
+    gsap.fromTo('[data-reveal="unit"]',
+      { opacity: 0, y: 24, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.75, stagger: 0.12,
+        ease: 'power3.out', immediateRender: true,
+        scrollTrigger: { trigger: '.units__grid', start: 'top 85%', once: true } });
   }
 
   /* ========================= PARALLAX DE MOUSE ============================= */

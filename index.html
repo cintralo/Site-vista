@@ -123,13 +123,7 @@
              width="2536" height="926" decoding="async">
       </a>
 
-      <!-- 2. EYEBROW -->
-      <p class="eyebrow" data-anim="eyebrow">
-        <span class="eyebrow__rule" aria-hidden="true"></span>
-        <span class="eyebrow__text">01 — Cirurgia de catarata</span>
-      </p>
-
-      <!-- 3. HEADLINE
+      <!-- 2. HEADLINE
            Variações prontas para troca (mantenha sempre 2 linhas):
            B) "Enxergar de novo" / "começa com um diagnóstico."
            C) "A cirurgia de catarata," / "explicada sem pressa."
@@ -140,14 +134,15 @@
         <span class="line-mask"><span class="headline__line headline__line--accent">E ela é cirúrgica.</span></span>
       </h1>
 
-      <!-- 4. PARÁGRAFO — descreve conduta e processo, sem prometer resultado. -->
+      <!-- 3. PARÁGRAFO — descreve conduta e processo, sem prometer resultado. -->
       <p class="lede" data-anim="lede">
-        A catarata turva a visão aos poucos, e o tratamento é cirúrgico. Aqui, a
-        indicação vem depois de uma avaliação completa — exames, cálculo da lente
-        intraocular e uma conversa sem pressa sobre riscos e alternativas.
+        A catarata turva a visão aos poucos e desbota as cores de sua vida. Aqui,
+        a indicação vem depois de uma avaliação completa, diagnóstico, exames e
+        escolha cuidadosa de suas lentes intraoculares, que melhor pode te
+        auxiliar para a <em class="lede__caps">sua</em> vida.
       </p>
 
-      <!-- 5. BOTÕES -->
+      <!-- 4. BOTÕES -->
       <div class="actions" data-anim="actions">
         <a class="btn btn--primary" href="#agendamento">
           <span class="btn__label">Agendar avaliação</span>
@@ -168,13 +163,6 @@
           <span class="btn__label">Como funciona a cirurgia</span>
         </a>
       </div>
-
-      <!-- 6. PILLS DE CREDIBILIDADE — descrições técnicas verificáveis, sem números. -->
-      <ul class="pills" data-anim="pills">
-        <li class="pill">Lentes intraoculares premium</li>
-        <li class="pill">Cirurgia com facoemulsificação</li>
-        <li class="pill">{{CRM}} / {{RQE}}</li>
-      </ul>
 
       <!-- Indicador de scroll -->
       <a class="scroll-cue" href="#servicos" data-anim="cue">
@@ -321,6 +309,146 @@
                 <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
               </svg>
             </span>
+          </div>
+        </article>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================================
+     TERCEIRA DOBRA — UNIDADES
+     Layout do print: título centralizado, duas fichas lado a lado com foto da
+     fachada no topo, nome da unidade, endereço e horários.
+     Vocabulário visual do design-system.html: título em caixa alta com ponto
+     final em destaque (e não o título todo em laranja do print), selo "NOVA"
+     no padrão do badge `rounded-full bg-orange-600 text-white` do DS, ícones
+     Lucide inline, cartão branco com raio e sombra dos tokens.
+     Endereços e horários transcritos literalmente do print enviado.
+     ========================================================================= -->
+<section class="units" id="unidades" aria-labelledby="units-title">
+  <div class="units__inner">
+
+    <header class="units__head">
+      <h2 class="units__title" id="units-title" data-reveal="units-title">
+        <span class="line-mask"><span class="units__line">Localização</span></span>
+        <span class="line-mask"><span class="units__line">e horários<span class="units__dot">.</span></span></span>
+      </h2>
+      <p class="units__lede" data-reveal="units-lede">Duas unidades no Distrito Federal.</p>
+    </header>
+
+    <ul class="units__grid">
+
+      <li class="unit" data-reveal="unit">
+        <article class="unit__card">
+          <!-- SLOT DE FOTO — sem arquivo em /assets, então fica o marcador.
+               Para publicar a foto: coloque o arquivo em /assets e troque este
+               <div class="unit__photo"> inteiro por:
+               <img class="unit__photo" src="assets/NOME-REAL.jpg" width="1600"
+                    height="900" loading="lazy" decoding="async"
+                    alt="Fachada da unidade Taguatinga do Vista — Hospital da Catarata">
+               O width/height é o que evita o pulo de layout quando ela carregar. -->
+          <div class="unit__photo unit__photo--empty" role="img"
+               aria-label="Espaço reservado para a foto da fachada da unidade Taguatinga">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+              <circle cx="9" cy="9" r="2"/>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+            </svg>
+            <span>{{FOTO_FACHADA_TAGUATINGA}}</span>
+          </div>
+
+          <div class="unit__body">
+            <p class="unit__kicker">Unidade</p>
+            <h3 class="unit__name">Taguatinga</h3>
+
+            <ul class="unit__facts">
+              <li class="unit__row">
+                <svg class="unit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <p><strong>Endereço:</strong> St. A Sul QSA 02 lotes 02/03 Ed. Centro Medico Marra - Taguatinga, Brasília - DF, 72015-020</p>
+              </li>
+              <li class="unit__row">
+                <svg class="unit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <p><strong>Seg a Sex:</strong> 08:00 às 18:00<br>
+                   <strong>Sábado:</strong> 08:00 às 12:00</p>
+              </li>
+            </ul>
+
+            <!-- Link de rota montado a partir do próprio endereço acima — nada
+                 inventado. Remova se preferir a ficha idêntica ao print. -->
+            <a class="unit__route"
+               href="https://www.google.com/maps/search/?api=1&amp;query=St.%20A%20Sul%20QSA%2002%20lotes%2002%2F03%20Ed.%20Centro%20Medico%20Marra%20Taguatinga%20Bras%C3%ADlia%20DF%2072015-020"
+               target="_blank" rel="noopener noreferrer">
+              Como chegar
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+              </svg>
+              <span class="sr-only">(abre o Google Maps em nova aba)</span>
+            </a>
+          </div>
+        </article>
+      </li>
+
+      <li class="unit" data-reveal="unit">
+        <article class="unit__card">
+          <!-- Mesmo procedimento da unidade acima para publicar a foto. -->
+          <div class="unit__photo unit__photo--empty" role="img"
+               aria-label="Espaço reservado para a foto da fachada da unidade Ceilândia">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+              <circle cx="9" cy="9" r="2"/>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+            </svg>
+            <span>{{FOTO_FACHADA_CEILANDIA}}</span>
+          </div>
+          <!-- Selo do print. Faixa diagonal virou pílula, que é o padrão de
+               badge do design system (`rounded-full ... text-white`). -->
+          <span class="unit__badge">Nova</span>
+
+          <div class="unit__body">
+            <p class="unit__kicker">Unidade</p>
+            <h3 class="unit__name">Ceilândia</h3>
+
+            <ul class="unit__facts">
+              <li class="unit__row">
+                <svg class="unit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <p><strong>Endereço:</strong> St. M QNM 17 Ed. Center One Loja 1 - Ceilândia, Brasília - DF, 72215-178</p>
+              </li>
+              <li class="unit__row">
+                <svg class="unit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <p><strong>Seg a Sex:</strong> 08:00 às 18:00<br>
+                   <strong>Sábado:</strong> 08:00 às 12:00</p>
+              </li>
+            </ul>
+
+            <a class="unit__route"
+               href="https://www.google.com/maps/search/?api=1&amp;query=St.%20M%20QNM%2017%20Ed.%20Center%20One%20Loja%201%20Ceil%C3%A2ndia%20Bras%C3%ADlia%20DF%2072215-178"
+               target="_blank" rel="noopener noreferrer">
+              Como chegar
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+              </svg>
+              <span class="sr-only">(abre o Google Maps em nova aba)</span>
+            </a>
           </div>
         </article>
       </li>

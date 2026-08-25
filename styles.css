@@ -137,6 +137,17 @@ ul { padding: 0; list-style: none; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 
+/* Texto só para leitores de tela (avisa que o link abre em nova aba). */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Foco visível único e consistente — ausente no design system. */
 :focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
@@ -194,10 +205,10 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   overflow: hidden;
   /* mobile: faixa que respira com a altura do aparelho, com piso e teto.
-     28dvh (era 32dvh): a logo em dobro custou ~38px de altura e essa faixa
-     devolve o equivalente, mantendo a última fila de pills na mesma posição
-     relativa à dobra num 375x812. */
-  height: clamp(170px, 28dvh, 300px);
+     38dvh (era 28dvh): a saída do eyebrow e das pills liberou ~120px de
+     orçamento vertical, devolvidos aqui — o retrato ganha enquadramento e o
+     conteúdo passa a caber inteiro num 375x812, sem cortar nada na dobra. */
+  height: clamp(210px, 38dvh, 360px);
 }
 .hero__photo {
   /* absoluto em vez de height:100%: assim a altura não depende de o grid item
@@ -274,26 +285,7 @@ a { color: inherit; text-decoration: none; }
      traria a placa branca de volta depois da animação. */
 }
 
-/* ---------- 4.4 Eyebrow ---------- */
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-  font-size: var(--text-xs);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  /* orange-700 e não orange-600: em 12px o 600 dá 3,2:1 e reprova AA */
-  color: var(--color-accent-ink);
-}
-.eyebrow__rule {
-  width: 2rem; height: 1px; flex: none;
-  background: currentColor; opacity: 0.6;
-}
-.eyebrow__text { display: inline-block; }
-
-/* ---------- 4.5 Headline ---------- */
+/* ---------- 4.4 Headline ---------- */
 .headline {
   font-size: var(--text-headline);
   font-weight: var(--fw-black);
@@ -318,7 +310,7 @@ a { color: inherit; text-decoration: none; }
 .headline__line--accent,
 .headline__line--accent * { color: var(--color-accent); }
 
-/* ---------- 4.6 Parágrafo ---------- */
+/* ---------- 4.5 Parágrafo ---------- */
 .lede {
   max-width: 52ch;
   font-size: var(--text-lede);
@@ -326,7 +318,18 @@ a { color: inherit; text-decoration: none; }
   color: var(--color-ink-soft);
 }
 
-/* ---------- 4.7 Botões ---------- */
+/* Ênfase do parágrafo. A caixa alta é do CSS: no DOM o texto continua "sua",
+   porque maiúsculas literais fazem alguns leitores de tela soletrar letra a
+   letra. <em> mantém a ênfase semântica sem o itálico. */
+.lede__caps {
+  font-style: normal;
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink);
+}
+
+/* ---------- 4.6 Botões ---------- */
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -391,37 +394,7 @@ a { color: inherit; text-decoration: none; }
 }
 .btn--ghost .btn__icon { color: var(--color-accent-ink); }
 
-/* ---------- 4.8 Pills ---------- */
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
-}
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 0.5rem var(--space-4);
-  border: 1px solid var(--color-line-strong);
-  border-radius: var(--radius-full);
-  /* 14px e não 12px: público de catarata tem acuidade reduzida por definição */
-  font-size: var(--text-sm);
-  font-weight: var(--fw-medium);
-  color: var(--color-ink-soft);           /* 6,8:1 → AA */
-  background: rgb(255 255 255 / 0.45);
-  transition: border-color var(--dur-1) var(--ease-out),
-              background-color var(--dur-1) var(--ease-out);
-}
-.pill::before {
-  content: "";
-  width: 5px; height: 5px; flex: none;
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-}
-.pill:hover { border-color: var(--color-accent-soft); background: var(--color-surface); }
-
-/* ---------- 4.9 Indicador de scroll ---------- */
+/* ---------- 4.7 Indicador de scroll ---------- */
 .scroll-cue {
   display: inline-flex;
   align-items: center;
@@ -489,9 +462,10 @@ a { color: inherit; text-decoration: none; }
    centro: sobe o enquadramento. E o indicador de scroll sai — em pilha vertical
    ele custa ~50px de dobra e a própria foto já sinaliza que a página continua. */
 @media (max-width: 899.98px) {
-  /* 42% (e não 50%): numa faixa horizontal, centralizar corta o alto da cabeça.
-     Descer o ponto de ancoragem mostra da testa ao jaleco. */
-  .hero__photo { object-position: 50% 42%; }
+  /* Com a faixa mais alta (38dvh), sobra pouco recorte vertical para distribuir.
+     Ancorar em 15% joga esse recorte quase todo para a base — que a máscara já
+     dissolve — e preserva o topo da cabeça, que em 42% ficava cortado. */
+  .hero__photo { object-position: 50% 15%; }
   .scroll-cue { display: none; }
 }
 
@@ -499,6 +473,10 @@ a { color: inherit; text-decoration: none; }
    severo. Mais altura devolve o rosto inteiro sem custar a dobra (há folga). */
 @media (min-width: 600px) and (max-width: 899.98px) {
   .hero__media { height: clamp(300px, 40dvh, 420px); }
+  /* Nesta faixa (bem mais larga que alta) cabe cerca de metade do retrato, e
+     não dá para ter o alto da cabeça E o sorriso. 30% escolhe a janela dos
+     olhos ao queixo: perder o topo do cabelo custa menos que perder o sorriso. */
+  .hero__photo { object-position: 50% 30%; }
 }
 
 /* Telas baixas em retrato: comprime a faixa da foto para o texto caber */
@@ -561,7 +539,7 @@ a { color: inherit; text-decoration: none; }
 
 /* Preferência de contraste elevado: engrossa as bordas de baixo contraste */
 @media (prefers-contrast: more) {
-  .pill, .btn--ghost { border-color: var(--color-ink-soft); }
+  .btn--ghost { border-color: var(--color-ink-soft); }
   .lede { color: var(--color-ink); }
 }
 
@@ -789,4 +767,184 @@ a { color: inherit; text-decoration: none; }
 }
 @media (min-width: 900px) {
   .svc__body { padding-inline: var(--space-3); }
+}
+
+
+/* =============================================================================
+   8. SEÇÃO UNIDADES — terceira dobra
+   ========================================================================== */
+
+.units {
+  padding-block: clamp(4.5rem, 9vw, 7rem);
+  background-color: var(--color-bg-alt);   /* alterna com o cream da dobra 2 */
+}
+.units__inner {
+  /* mais estreito que as outras seções (80rem): com apenas duas fichas, a
+     largura cheia deixaria cada uma larga demais e a composição solta */
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: var(--hero-pad-x);
+}
+
+/* ---------- 8.1 Cabeçalho centralizado ---------- */
+.units__head {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+.units__title {
+  margin: 0;
+  font-size: clamp(2rem, 4.6vw, 3.75rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-headline);
+  text-transform: uppercase;
+}
+/* Duas linhas autoradas em vez de uma frase que reflui: máscara de linha só
+   funciona sobre quebra previsível, e centralizado a quebra muda com a largura. */
+.units__line { display: block; }
+/* accent-ink e não accent: o fundo desta seção é bg-alt, um pouco mais escuro
+   que o cream, e ali o orange-600 cai para 2,94:1 — abaixo do mínimo de 3:1
+   até para texto grande. O orange-700 sobe para 4,28:1. */
+.units__dot { color: var(--color-accent-ink); }
+.units__lede {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+/* ---------- 8.2 Grade ---------- */
+.units__grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: 1fr;
+}
+
+/* ---------- 8.3 Ficha da unidade ---------- */
+.unit__card {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;                        /* recorta a foto no raio do cartão */
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-3xl);        /* DS rounded-3xl */
+  transition: transform var(--dur-2) var(--ease-out),
+              box-shadow var(--dur-2) var(--ease-out);
+}
+.unit__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+
+.unit__photo {
+  display: block;
+  width: 100%;
+  /* proporção fixa reserva o espaço antes da imagem chegar: sem isto o texto
+     abaixo pula quando a foto carregar */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+/* Estado sem arquivo. Some sozinho no momento em que a <img> real substituir
+   este bloco — não há CSS a limpar depois. */
+.unit__photo--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  /* base branca, e não bg-alt: com o fundo da seção também em bg-alt o slot
+     virava um buraco no cartão em vez de um espaço reservado dentro dele */
+  background:
+    repeating-linear-gradient(45deg, rgb(28 25 23 / 0.035) 0 10px, transparent 10px 20px),
+    var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink-mute);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Selo "NOVA" — pílula do design system, sobre a foto */
+.unit__badge {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  padding: 0.3rem var(--space-3);
+  border-radius: var(--radius-full);
+  /* accent-ink e não accent: branco sobre orange-600 dá 3,56:1 e reprova AA
+     em texto pequeno; sobre orange-700 sobe para 5,18:1 */
+  background: var(--color-accent-ink);
+  color: var(--color-surface);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+}
+
+.unit__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+.unit__kicker {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+.unit__name {
+  margin: var(--space-1) 0 0;
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+  /* 3,56:1 sobre branco: aprovado como texto grande (≥24px em negrito) */
+  color: var(--color-accent);
+}
+
+.unit__facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  font-size: 0.9375rem;
+  line-height: var(--leading-relaxed);
+  color: var(--color-ink-soft);
+}
+.unit__row { display: flex; gap: var(--space-3); }
+.unit__row p { margin: 0; }
+.unit__row strong { color: var(--color-ink); font-weight: var(--fw-semibold); }
+.unit__icon {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.28em;                      /* alinha com a primeira linha */
+  color: var(--color-accent);
+}
+
+.unit__route {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  margin-top: auto;                        /* fichas de alturas diferentes
+                                              terminam com o link alinhado */
+  padding-top: var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-accent-ink);
+  border-radius: var(--radius-lg);
+}
+.unit__route svg { transition: transform var(--dur-1) var(--ease-out); }
+.unit__route:hover svg { transform: translate(2px, -2px); }
+
+/* ---------- 8.4 Animações da seção ---------- */
+.js-reveal .units__line { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .units__line { opacity: 1; transform: none; }
+}
+
+/* ---------- 8.5 Media queries da seção ---------- */
+@media (min-width: 700px) {
+  .units__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
