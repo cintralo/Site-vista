@@ -102,6 +102,9 @@
   --hero-col-content: 55%;
   --hero-pad-x: clamp(1.25rem, 4vw, 5rem);     /* DS px-5 → lg:px-8, esticado */
   --hero-pad-y: clamp(1.5rem, 4vh, 4rem);
+  /* [NOVO] respiro entre a marca e a headline. Soma ao gap do contêiner: com a
+     logo em 2x e sem o eyebrow entre as duas, o gap padrão colava os blocos. */
+  --hero-brand-gap: clamp(1rem, 2.6vw, 2.5rem);
 
   /* --- textura [NOVO] --- */
   --grain-opacity: 0.03;
@@ -205,10 +208,10 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   overflow: hidden;
   /* mobile: faixa que respira com a altura do aparelho, com piso e teto.
-     38dvh (era 28dvh): a saída do eyebrow e das pills liberou ~120px de
-     orçamento vertical, devolvidos aqui — o retrato ganha enquadramento e o
-     conteúdo passa a caber inteiro num 375x812, sem cortar nada na dobra. */
-  height: clamp(210px, 38dvh, 360px);
+     36dvh: a saída do eyebrow e das pills liberou ~120px, quase todos devolvidos
+     aqui. Os 2dvh a menos (era 38dvh) pagam exatamente o --hero-brand-gap, para
+     a Hero seguir fechando inteira num 375x812. */
+  height: clamp(200px, 36dvh, 340px);
 }
 .hero__photo {
   /* absoluto em vez de height:100%: assim a altura não depende de o grid item
@@ -272,6 +275,8 @@ a { color: inherit; text-decoration: none; }
   /* centralizada no bloco de texto: o único elemento fora do eixo à esquerda.
      align-self vence o align-items:flex-start do contêiner flex. */
   align-self: center;
+  /* margem soma ao gap do flex: 24px + 40px no desktop, 16px + 16px no mobile */
+  margin-bottom: var(--hero-brand-gap);
 }
 .hero__logo {
   width: auto;
